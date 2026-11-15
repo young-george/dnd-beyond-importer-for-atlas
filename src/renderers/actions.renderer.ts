@@ -32,9 +32,13 @@ export default class ActionsRenderer extends AbstractRenderer {
             const atkStr = a.attackBonus != null
                 ? (a.attackBonus >= 0 ? `+${a.attackBonus}` : `${a.attackBonus}`)
                 : "";
-            const dmgStr = a.damageDice
+            let dmgStr = a.damageDice
                 ? `${a.damageDice}${a.damageBonus !== 0 ? (a.damageBonus >= 0 ? `+${a.damageBonus}` : `${a.damageBonus}`) : ""}`
                 : (a.damageBonus !== 0 ? `${a.damageBonus}` : "");
+            
+            if (a.twoHandedDamage){
+                dmgStr = `${dmgStr} (${a.twoHandedDamage} two-handed)`;
+            }
             
             const hitSave = a.save ? a.save : atkStr;
 
@@ -96,15 +100,21 @@ export default class ActionsRenderer extends AbstractRenderer {
                 weaponBehaviors?: Array<{
                     attackType?: number;
                     damage?: { diceString?: string; fixedValue?: number };
-                    properties?: Array<{ name?: string }>
+                    properties?: Array<{
+                        notes?: string;
+                        name?: string }>
                 }>;
                 isMonkWeapon?: boolean;
                 weaponTypeRange?: number;
                 range: number;
                 longRange?: number;
                 categoryId?: number;
-                damage?: { diceString?: string; fixedValue?: number };
-                properties?: Array<{ name?: string }>;
+                damage?: {
+                    diceCount: number;
+                    diceString?: string; fixedValue?: number ; diceValue?: number};
+                properties?: Array<{
+                    notes?: string; name?: string
+                }>;
                 damageType?: string;
             });
             if (!def || !item.equipped) continue;
@@ -132,7 +142,7 @@ export default class ActionsRenderer extends AbstractRenderer {
             
             // Only use damage dice if explicitly defined on the item — homebrew items with no
             // damage field (e.g. utility weapons) are ATK-only and show no DMG roll.
-            const dmgDice: string | null = def.damage?.diceString ?? null;
+            const dmgDice: string | null = def.damage?.diceString ?? def.weaponBehaviors?.[0]?.damage?.diceString ?? null;
             const fixedVal: number | null = def.damage?.fixedValue ?? null;
             
             const dmgBonus = ([
@@ -143,7 +153,22 @@ export default class ActionsRenderer extends AbstractRenderer {
             
             // Build range string — prefer explicit rangeValue, then properties, then defaults
             const rangeVal = `${def.range} ft ${def.longRange && def.longRange != def.range ? `(${def.longRange} ft)`.trim() : ""}`;
-
+            let twoHandedDamage = '';
+            
+            const twoHandedProperty = def.weaponBehaviors?.flatMap(wb => wb.properties)?.find(p => p?.name == "Versatile");
+            if (twoHandedProperty) {
+                
+                if (twoHandedProperty.notes?.match(/^(\d+)d(\d+)$/)) {
+                    twoHandedDamage = `${twoHandedProperty.notes}${dmgBonus !== 0 ? (dmgBonus >= 0 ? `+${dmgBonus}` : `${dmgBonus}`) : ""}`;
+                } else {
+                    const diceValues: Record<number, number> = {4: 6, 6: 8, 8: 10, 10: 12, 12: 20};
+                    const versatileDie = diceValues[def.damage?.diceValue ?? 4];
+                    if (versatileDie) {
+                        twoHandedDamage = `${def.damage?.diceCount ?? 1}d${versatileDie}${dmgBonus !== 0 ? (dmgBonus >= 0 ? `+${dmgBonus}` : `${dmgBonus}`) : ""}`;
+                    }
+                }
+            }
+            
             responses[0].push({
                 name: def.name ?? "Unknown Weapon",
                 isWeaponAttack: true,
@@ -151,6 +176,7 @@ export default class ActionsRenderer extends AbstractRenderer {
                 damageDice: dmgDice,
                 damageBonus: dmgBonus,
                 damageType: def.damageType ?? "",
+                twoHandedDamage,
                 range: rangeVal,
                 notes: propNames.join(", "),
                 isSpell: false,

@@ -30,6 +30,7 @@ export interface CharacterAction {
     damageDice: string | null;
     damageBonus: number;
     damageType?: string;
+    twoHandedDamage?: string;
     range: string;
     notes?: string;
     isSpell: boolean;

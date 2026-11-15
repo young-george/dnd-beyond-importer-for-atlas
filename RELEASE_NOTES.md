@@ -5,6 +5,7 @@
 - Fix an issue with spells upcasting all the way to level 9.
 - Fix an issue with healing spells not showing dice rolls.
 - Warn the user when the `5e (2024) Character Sheet` template is out of date, offering to update it.
+- Fix issue with weapon behaviours and damage dice not showing correctly for versatile weapons.
 
 ## 1.0.8
 - Fix issue with multiline allies/organisations.
