@@ -77,3 +77,13 @@
 .action-use {
 	vertical-align: sub;
 }
+
+.dndbi-import-url-input {
+	flex-direction: column;
+	.setting-item-control {
+		width: 100%;
+		input {
+			flex: 1;
+		}
+	}
+}

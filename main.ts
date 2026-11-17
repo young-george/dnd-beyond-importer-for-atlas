@@ -12,6 +12,7 @@ import ImportModal from "./src/import-modal";
 import MarkdownBuilder from "./src/markdown.builder";
 import 'src/array-extensions';
 import TemplateManager from "./src/TemplateManager";
+import Utilities from "./src/utilities";
 
 declare global {
 	interface Array<T> {
@@ -43,11 +44,6 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		this.app.workspace.onLayoutReady(async () => {
 			this.app.workspace.on('active-leaf-change', async(leaf: WorkspaceLeaf | null) => {
 				
-				// checked on each leaf change so that changing relevant setting doesn't require a restart to take effect
-				if (!this.pluginSettings.importWhenOpening) {
-					return;
-				}
-				
                 if (leaf) {
                     const activeFile = this.app.workspace.getActiveFile();
 					if(activeFile?.path == this.activeFilePath) {
@@ -60,24 +56,23 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 							const fileCache = this.app.metadataCache.getFileCache(activeFile);
 						
 							const frontmatter = fileCache?.frontmatter;
-
-							if (frontmatter?.["dndbeyond_id"]) {
-								this.importCharacter(frontmatter["dndbeyond_id"].toString());
+							
+							if (!Utilities.shouldImport("importWhenOpening", frontmatter, this.pluginSettings)) {
+								return;
 							}
+							
+							this.importCharacter(frontmatter["dndbeyond_id"].toString());
+							
 						}
-						
 					}
             	})
-
-
-			if (!this.pluginSettings.importOnStartup) {
-				return;
-			}
 			
 			for (const file of this.app.vault.getMarkdownFiles()) {
-				const fm: Record<string, unknown> | undefined =
-					this.app.metadataCache.getFileCache(file)?.frontmatter;
-				if (!fm?.["dndbeyond_id"]) continue;
+				const fm: Record<string, unknown> | undefined = this.app.metadataCache.getFileCache(file)?.frontmatter;
+
+				if (!Utilities.shouldImport("importWhenOpening", fm, this.pluginSettings)) {
+					continue;
+				}
 				await this.importCharacter(fm?.["dndbeyond_id"].toString());
 			}
 		});
@@ -167,7 +162,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		await this.saveData(this.pluginSettings);
 	}
 	
-	async importCharacter(idOrUrl: string): Promise<void> {
+	async importCharacter(idOrUrl: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>): Promise<void> {
 		
 		await TemplateManager.installTemplate(this.app);
 		
@@ -218,7 +213,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		
 		let markdown: string;
 		try {
-			markdown = MarkdownBuilder.buildMarkdown(data, this.pluginSettings, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
+			markdown = MarkdownBuilder.buildMarkdown(data, this.pluginSettings, settingsOverrides, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
 		} catch (e) {
 			const msg = e instanceof Error ? e.message : String(e);
 			new Notice(`❌ Failed to build character note: ${msg}`, 5000);

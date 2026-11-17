@@ -16,6 +16,7 @@ import EquipmentRenderer from "./renderers/equipment.renderer";
 import CurrenciesRenderer from "./renderers/currencies.renderer";
 import NotesRenderer from "./renderers/notes.renderer";
 import TurndownService from 'turndown';
+import SettingsRenderer from "./renderers/settings.renderer";
 
 export default class MarkdownBuilder {
     
@@ -24,30 +25,47 @@ export default class MarkdownBuilder {
     static buildMarkdown(
         data: DdbApiResponse,
         settings: Partial<DnDBeyondImporterSettings>,
+        settingsOverrides?: Partial<DnDBeyondImporterSettings>,
         existingFrontmatter?: Record<string, unknown>
     ): string {
 
         const char = data.data;
         if (!char) throw new Error("Unexpected API response structure");
 
-        const sheet = new CharacterSheet(char, settings);
+        if (!settingsOverrides){
+            settingsOverrides = {
+                embedDndBeyond: existingFrontmatter?.["embedDndBeyond"] as boolean | undefined,
+                includeDescriptions: existingFrontmatter?.["includeDescriptions"] as boolean | undefined,
+                importOnStartup: existingFrontmatter?.["importOnStartup"] as boolean | undefined,
+                importWhenOpening: existingFrontmatter?.["importWhenOpening"] as boolean | undefined,
+                importSkillValues: existingFrontmatter?.["importSkillValues"] as boolean | undefined
+            }
+        }
+        
+        const overrideSettings = Object.assign({}, settings, Object.fromEntries(Object.entries(settingsOverrides ?? {}).filter(([_, value]) => value !== undefined)));
 
+        console.log("Building markdown with settings:", settings,  overrideSettings);
+        
+        const sheet = new CharacterSheet(char, overrideSettings);
+        
+        
         const renderers = [
-            new FrontmatterRenderer(sheet, settings, existingFrontmatter),
-            new BasicDetailsRenderer(sheet, settings),
-            new HitpointsRenderer(sheet, settings),
-            new CombatStatsRenderer(sheet, settings),
-            new StatsRenderer(sheet, settings),
-            new SkillsRenderer(sheet, settings),
-            new DefensesRenderer(sheet, settings),
-            new SensesRenderer(sheet, settings),
-            new ProficienciesRenderer(sheet, settings),
-            new ActionsRenderer(sheet, settings),
-            new SpellcastingRenderer(sheet, settings),
-            new FeaturesRenderer(sheet, settings),
-            new EquipmentRenderer(sheet, settings),
-            new CurrenciesRenderer(sheet, settings),
-            new NotesRenderer(sheet, settings, existingFrontmatter)
+            new FrontmatterRenderer(sheet, overrideSettings, existingFrontmatter),
+            new SettingsRenderer(sheet, settings, existingFrontmatter, settingsOverrides),
+            new BasicDetailsRenderer(sheet, overrideSettings),
+            new HitpointsRenderer(sheet, overrideSettings),
+            new CombatStatsRenderer(sheet, overrideSettings),
+            new StatsRenderer(sheet, overrideSettings),
+            new SkillsRenderer(sheet, overrideSettings),
+            new DefensesRenderer(sheet, overrideSettings),
+            new SensesRenderer(sheet, overrideSettings),
+            new ProficienciesRenderer(sheet, overrideSettings),
+            new ActionsRenderer(sheet, overrideSettings),
+            new SpellcastingRenderer(sheet, overrideSettings),
+            new FeaturesRenderer(sheet, overrideSettings),
+            new EquipmentRenderer(sheet, overrideSettings),
+            new CurrenciesRenderer(sheet, overrideSettings),
+            new NotesRenderer(sheet, overrideSettings, existingFrontmatter)
         ]
 
         let md = `---
@@ -58,7 +76,7 @@ ${renderers.map(r => r.render().trim()).join("\n")}
 charId:${char.id}
 \`\`\`\n\n
 
-${settings.embedDndBeyond ? `<iframe class="dnd-frame" src="https://www.dndbeyond.com/characters/${char.id}"></iframe>` : ''}
+${overrideSettings.embedDndBeyond ? `<iframe class="dnd-frame" src="https://www.dndbeyond.com/characters/${char.id}"></iframe>` : ''}
 
 ${this.buildDetails(sheet)}
 `

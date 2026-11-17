@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 164732427
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Ak'tar
 species: "Orc"
 class: "Barbarian"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Barbarian (d12)"
     max: 5
     used: 0
-initiative: "+2"
+initiative: "2"
 ac: 14
 speed: 40
 stats:
@@ -46,21 +53,21 @@ saves:
 - con: " +5"
 - int: " -1"
 - wis: " +0"
-- cha: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +1"
+- cha: "▲A +1"
 acrobatics_override: " +2"
 animal_handling_override: " +0"
 arcana_override: " -1"
-athletics_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +6"
-deception_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +1"
+athletics_override: "▲A +6"
+deception_override: "▲A +1"
 history_override: " -1"
 insight_override: " +0"
-intimidation_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +4"
+intimidation_override: "▲A +4"
 investigation_override: " -1"
 medicine_override: " +3"
 nature_override: " -1"
 perception_override: " +3"
-performance_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +1"
-persuasion_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +1"
+performance_override: "▲A +1"
+persuasion_override: "▲A +1"
 religion_override: " -1"
 sleight_of_hand_override: " +2"
 stealth_override: " +2"
@@ -129,7 +136,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / short rest"
 - name: "Enhanced Dual Wielding"
   range: ""
   attack: ""
@@ -147,7 +154,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 
 otheractions:
 - name: "Rage: Primal Knowledge"
@@ -161,7 +168,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 
 class_features:
 - name: "Core Barbarian Traits"

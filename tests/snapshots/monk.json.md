@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 173042556
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Monk
 species: "Human"
 class: "Monk"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Monk (d8)"
     max: 13
     used: 0
-initiative: "+7"
+initiative: "7"
 ac: 12
 speed: 50
 stats:
@@ -171,7 +178,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 
 reactions:
 - name: "Deflect Attack"
@@ -211,13 +218,13 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 - name: "Uncanny Metabolism"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 
 class_features:
 - name: "Core Monk Traits"

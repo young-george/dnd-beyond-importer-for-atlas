@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 171620138
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: All feats
 species: "Human"
 class: "Barbarian / Fighter"
@@ -33,7 +40,7 @@ hit_dice_pool:
   - name: "Fighter (d10)"
     max: 1
     used: 0
-initiative: "+10"
+initiative: "10"
 ac: 17
 speed: 40
 stats:
@@ -114,9 +121,9 @@ actions:
 - name: "Chromatic Orb"
   range: "90 ft"
   attack: "+2"
-  damage: "3d8 + 3d8 + 3d8 + 3d8 + 3d8 + 3d8"
+  damage: "3d8"
   type: "Acid, Cold, Fire, Lightning, Poison, Thunder"
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 - name: "Fire Bolt"
   range: "120 ft"
   attack: "+2"
@@ -201,13 +208,13 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 - name: "Gift of the Chromatic Dragon: Chromatic Infusion"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 - name: "Great Weapon Master Attack"
   range: ""
   attack: ""
@@ -231,13 +238,13 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Second Wind"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Shield Master Shove"
   range: ""
   attack: ""
@@ -263,13 +270,13 @@ reactions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 - name: "Gift of the Metallic Dragon: Protective Wings"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 - name: "Interception"
   range: ""
   attack: ""
@@ -319,13 +326,13 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 - name: "Chef: Special Food"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 - name: "Crusher"
   range: ""
   attack: ""
@@ -349,7 +356,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 - name: "Maneuvers: Bait and Switch"
   range: ""
   attack: ""
@@ -379,7 +386,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / null"
 - name: "Pull (Atgeir)"
   range: ""
   attack: ""
@@ -421,7 +428,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Topple (Blunderbuss (Steinhardt's)) "
   range: ""
   attack: ""
@@ -502,166 +509,6 @@ tab_2:
   duration: Instantaneous
   cost: "Action"
   damage: 3d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_3:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 4d8 + 4d8 + 4d8 + 4d8 + 4d8 + 4d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_4:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 5d8 + 5d8 + 5d8 + 5d8 + 5d8 + 5d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_5:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d8 + 6d8 + 6d8 + 6d8 + 6d8 + 6d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_6:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d8 + 7d8 + 7d8 + 7d8 + 7d8 + 7d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_7:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d8 + 8d8 + 8d8 + 8d8 + 8d8 + 8d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_8:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d8 + 9d8 + 9d8 + 9d8 + 9d8 + 9d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_9:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d8 + 10d8 + 10d8 + 10d8 + 10d8 + 10d8
-  type: Acid, Cold, Fire, Lightning, Poison, Thunder
-
-tab_10:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Chromatic Orb (Upcast)" 
-  range: 90 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d8 + 11d8 + 11d8 + 11d8 + 11d8 + 11d8
   type: Acid, Cold, Fire, Lightning, Poison, Thunder
 class_features:
 - name: "Core Barbarian Traits"

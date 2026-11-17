@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 168818959
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Soveliss
 species: "Human"
 class: "Warlock"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Warlock (d8)"
     max: 7
     used: 0
-initiative: "+2"
+initiative: "2"
 ac: 14
 speed: 30
 stats:
@@ -108,12 +115,18 @@ actions:
   type: "Acid"
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Hex"
+  range: "90 ft"
+  attack: ""
+  damage: "1d6"
+  type: "Necrotic"
+  desc: " "
+- name: "Jump"
+  range: "Touch"
   attack: ""
   damage: ""
   type: ""
-  desc: "Jump, Hex "
+  desc: " "
 - name: "Awakened Mind"
   range: ""
   attack: ""
@@ -125,12 +138,20 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ short rest"
 - name: "Gaze of Two Minds: Perceive Senses"
   range: ""
   attack: ""
   damage: ""
   type: ""
+  desc: " "
+
+reactions:
+- name: "Hellish Rebuke"
+  range: "60 ft"
+  attack: "DC11 DEX"
+  damage: "2d10"
+  type: "Fire"
   desc: " "
 
 otheractions:
@@ -139,7 +160,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 spellcasting_ability: "CHA"
 spell_save_dc: 15
 spell_attack_bonus: +7
@@ -229,25 +250,35 @@ tab_2:
   damage: 
   type: 
 
+tab_4:
+- name: "Clairvoyance " 
+  range: 5280 ft
+  duration: Concentration, up to 10 minutes
+  cost: "Time: 1 minute"
+  damage: 
+  type: 
+- name: "Hunger of Hadar " 
+  range: 150 ft
+  duration: Concentration, up to 1 minute
+  cost: "Action"
+  damage: 2d6
+  type: Cold, Acid
+
+tab_5:
+- name: "Confusion " 
+  range: 90 ft
+  duration: Concentration, up to 1 minute
+  cost: "Action"
+  damage: 
+  type: 
+- name: "Summon Aberration " 
+  range: 90 ft
+  duration: Concentration, up to 1 hour
+  cost: "Action"
+  damage: 
+  type: 
+
 tab_3:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
 - name: "Darkness " 
   range: 60 ft
   duration: Concentration, up to 10 minutes
@@ -266,476 +297,12 @@ tab_3:
   cost: "Action"
   damage: 
   type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 4d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 3d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
 - name: "Phantasmal Force " 
   range: 60 ft
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 2d8
   type: Psychic
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_4:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Clairvoyance " 
-  range: 5280 ft
-  duration: Concentration, up to 10 minutes
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 5d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 4d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Hunger of Hadar " 
-  range: 150 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 2d6
-  type: Cold, Acid
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_5:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion " 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 5d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration " 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_6:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 6d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_7:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 7d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_8:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 8d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_9:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 9d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-
-tab_10:
-- name: "Bane (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cause Fear (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Charm Person (Upcast)" 
-  range: 30 ft
-  duration: Up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Confusion (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d6
-  type: Psychic
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 10d10
-  type: Fire
-- name: "Hex (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Bonus Action"
-  damage: 1d6
-  type: Necrotic
-- name: "Jump (Upcast)" 
-  range: Touch
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Summon Aberration (Upcast)" 
-  range: 90 ft
-  duration: Concentration, up to 1 hour
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Tasha's Hideous Laughter (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
 
 spellcasting:
 - name: "Eldritch Blast " 

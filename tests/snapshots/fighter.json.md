@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 173032227
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Fighty McFightface
 species: "Goliath"
 class: "Fighter"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Fighter (d10)"
     max: 20
     used: 0
-initiative: "+10"
+initiative: "10"
 ac: 17
 speed: 35
 stats:
@@ -50,7 +57,7 @@ saves:
 acrobatics_override: " +10"
 animal_handling_override: " +0"
 arcana_override: " +1"
-athletics_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +10"
+athletics_override: "▲A +10"
 deception_override: " -1"
 history_override: " +1"
 insight_override: " +0"
@@ -63,7 +70,7 @@ performance_override: " -1"
 persuasion_override: " -1"
 religion_override: " +1"
 sleight_of_hand_override: " +10"
-stealth_override: " <span style=\"color:#ef4444;font-weight:700;\">▼D</span> +10"
+stealth_override: "▼D +10"
 survival_override: " +0"
 
 acrobatics_prof: ◆
@@ -128,7 +135,7 @@ actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 - name: "Heroic Warrior"
   range: ""
   attack: ""
@@ -207,13 +214,13 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 - name: "Second Wind"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Second Wind: Tactical Shift"
   range: ""
   attack: ""
@@ -227,7 +234,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 - name: "Improved Critical"
   range: ""
   attack: ""
@@ -239,7 +246,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Tactical Mind"
   range: ""
   attack: ""

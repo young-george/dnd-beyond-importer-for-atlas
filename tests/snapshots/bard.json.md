@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 169957259
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Elerra
 species: "Tiefling"
 class: "Bard"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Bard (d8)"
     max: 7
     used: 0
-initiative: "+3"
+initiative: "3"
 ac: 15
 speed: 30
 stats:
@@ -83,7 +90,7 @@ religion_prof: ⬖
 sleight_of_hand_prof: ⬖
 stealth_prof: ⬖
 survival_prof: ⬖
-damage_resistances: Fire
+damage_resistances: None
 damage_immunities: None
 damage_vulnerabilities: None
 senses: Passive Perception **11**, Passive Investigation **9**, Passive Insight **11**, Darkvision 60ft
@@ -115,24 +122,30 @@ actions:
   type: "Bludgeoning"
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Healing Word"
+  range: "60 ft"
   attack: ""
   damage: ""
   type: ""
-  desc: "Healing Word, Mass Healing Word "
+  desc: " "
+- name: "Mass Healing Word"
+  range: "60 ft"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
 - name: "Bardic Inspiration"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 - name: "Bardic Inspiration"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 
 reactions:
 - name: "Combat Inspiration: Defense"
@@ -212,7 +225,7 @@ tab_4:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Dissonant Whispers (Upcast)" 
   range: 60 ft
   duration: Instantaneous
@@ -224,7 +237,7 @@ tab_4:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Heat Metal (Upcast)" 
   range: 60 ft
   duration: Concentration, up to 1 minute
@@ -247,15 +260,15 @@ tab_4:
   range: 60 ft
   duration: Instantaneous
   cost: "Bonus Action"
-  damage: 
-  type: 
+  damage: 2d4
+  type: Healing
 
 tab_5:
 - name: "Astral Flood (Upcast)" 
   range: Self
   duration: Instantaneous
   cost: "Action"
-  damage: 5d10 + 5d10
+  damage: 5d10
   type: Cold, Radiant
 - name: "Command (Upcast)" 
   range: 60 ft
@@ -268,7 +281,7 @@ tab_5:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Dissonant Whispers (Upcast)" 
   range: 60 ft
   duration: Instantaneous
@@ -280,7 +293,7 @@ tab_5:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Heat Metal (Upcast)" 
   range: 60 ft
   duration: Concentration, up to 1 minute
@@ -304,287 +317,7 @@ tab_5:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
-
-tab_6:
-- name: "Astral Flood (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d10 + 6d10
-  type: Cold, Radiant
-- name: "Command (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d6
-  type: Psychic
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Heat Metal (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 5d8
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 6d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 6d10
-  type: Fire
-- name: "Mass Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-
-tab_7:
-- name: "Astral Flood (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d10 + 7d10
-  type: Cold, Radiant
-- name: "Command (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d6
-  type: Psychic
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Heat Metal (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 6d8
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 7d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 7d10
-  type: Fire
-- name: "Mass Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-
-tab_8:
-- name: "Astral Flood (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d10 + 8d10
-  type: Cold, Radiant
-- name: "Command (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d6
-  type: Psychic
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Heat Metal (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 7d8
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 8d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 8d10
-  type: Fire
-- name: "Mass Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-
-tab_9:
-- name: "Astral Flood (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d10 + 9d10
-  type: Cold, Radiant
-- name: "Command (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d6
-  type: Psychic
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Heat Metal (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 8d8
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 9d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 9d10
-  type: Fire
-- name: "Mass Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-
-tab_10:
-- name: "Astral Flood (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d10 + 10d10
-  type: Cold, Radiant
-- name: "Command (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dissonant Whispers (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d6
-  type: Psychic
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Heat Metal (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 9d8
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 10d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 10d10
-  type: Fire
-- name: "Mass Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
+  type: Healing
 
 tab_2:
 - name: "Command " 
@@ -597,8 +330,8 @@ tab_2:
   range: Touch
   duration: Instantaneous
   cost: "Action"
-  damage: 
-  type: 
+  damage: 2d8
+  type: Healing
 - name: "Dissonant Whispers " 
   range: 60 ft
   duration: Instantaneous
@@ -609,8 +342,8 @@ tab_2:
   range: 60 ft
   duration: Instantaneous
   cost: "Bonus Action"
-  damage: 
-  type: 
+  damage: 2d4
+  type: Healing
 - name: "Hellish Rebuke " 
   range: 60 ft
   duration: Instantaneous
@@ -648,7 +381,7 @@ tab_3:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Darkness " 
   range: 60 ft
   duration: Concentration, up to 10 minutes
@@ -672,7 +405,7 @@ tab_3:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Heat Metal " 
   range: 60 ft
   duration: Concentration, up to 1 minute

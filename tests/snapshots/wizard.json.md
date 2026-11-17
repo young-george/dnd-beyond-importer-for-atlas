@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 168673586
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Therai
 species: "Tiefling"
 class: "Wizard"
@@ -30,40 +37,40 @@ hit_dice_pool:
   - name: "Wizard (d6)"
     max: 7
     used: 0
-initiative: "+3"
-ac: 16
+initiative: "2"
+ac: 15
 speed: 30
 stats:
   - 9
-  - 16
+  - 15
   - 10
-  - 18
+  - 16
   - 10
   - 12
 saves:
 - str: " -1"
-- dex: " +3"
+- dex: " +2"
 - con: " +0"
-- int: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +7"
+- int: "▲A +6"
 - wis: " +3"
 - cha: " +1"
-acrobatics_override: " +3"
+acrobatics_override: " +2"
 animal_handling_override: " +0"
-arcana_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +7"
+arcana_override: "▲A +6"
 athletics_override: " -1"
 deception_override: " +1"
-history_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +4"
+history_override: "▲A +3"
 insight_override: " +0"
 intimidation_override: " +1"
-investigation_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +7"
+investigation_override: "▲A +6"
 medicine_override: " +0"
-nature_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +4"
+nature_override: "▲A +3"
 perception_override: " +0"
 performance_override: " +4"
 persuasion_override: " +1"
-religion_override: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +4"
-sleight_of_hand_override: " +6"
-stealth_override: " +6"
+religion_override: "▲A +3"
+sleight_of_hand_override: " +5"
+stealth_override: " +5"
 survival_override: " +0"
 
 arcana_prof: ◆
@@ -71,12 +78,12 @@ investigation_prof: ◆
 performance_prof: ◆
 sleight_of_hand_prof: ◆
 stealth_prof: ◆
-damage_resistances: Fire
+damage_resistances: None
 damage_immunities: None
 damage_vulnerabilities: None
-senses: Passive Perception **10**, Passive Investigation **17**, Passive Insight **10**, Darkvision 60ft
+senses: Passive Perception **10**, Passive Investigation **16**, Passive Insight **10**, Darkvision 60ft
 passive_perception: 10
-passive_investigation: 17
+passive_investigation: 16
 passive_insight: 10
 languages: Common, Common Sign Language, Draconic
 armor_training: Light Armor
@@ -85,8 +92,8 @@ weapon_mastery:
 actions:
 - name: "Rapier"
   range: "5 ft "
-  attack: "+3"
-  damage: "1d8+3"
+  attack: "+2"
+  damage: "1d8+2"
   type: "Piercing"
   desc: "Finesse, Vex "
 - name: "Unarmed Strike"
@@ -97,37 +104,67 @@ actions:
   desc: " "
 - name: "Scorching Ray"
   range: "120 ft"
-  attack: "+8"
+  attack: "+7"
   damage: "2d6"
   type: "Fire"
   desc: " "
 - name: "Vampiric Touch"
   range: "Self"
-  attack: "+8"
+  attack: "+7"
   damage: "3d6"
   type: "Necrotic"
   desc: " "
 - name: "Witch Bolt"
   range: "60 ft"
-  attack: "+8"
+  attack: "+7"
   damage: "2d12 + 1d12"
   type: "Lightning, Lightning"
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Dragon's Breath"
+  range: "Touch"
+  attack: "DC12 DEX"
+  damage: "3d6"
+  type: "Acid, Cold, Fire, Lightning, Poison"
+  desc: " "
+- name: "Misty Step"
+  range: "Self"
   attack: ""
   damage: ""
   type: ""
-  desc: "Misty Step, Shadow Blade, Dragon's Breath "
+  desc: " "
+- name: "Shadow Blade"
+  range: "Self"
+  attack: ""
+  damage: "2d8"
+  type: "Psychic"
+  desc: " "
 - name: "Bladesong"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 
 reactions:
+- name: "Counterspell"
+  range: "60 ft"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
+- name: "Feather Fall"
+  range: "60 ft"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
+- name: "Shield"
+  range: "Self"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
 - name: "Reactive Spell"
   range: ""
   attack: ""
@@ -141,7 +178,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
 - name: "Cantrip Formulas"
   range: ""
   attack: ""
@@ -149,8 +186,8 @@ otheractions:
   type: ""
   desc: " "
 spellcasting_ability: "INT"
-spell_save_dc: 16
-spell_attack_bonus: +8
+spell_save_dc: 15
+spell_attack_bonus: +7
 
 slots:
 - name: 1st Level
@@ -289,7 +326,7 @@ tab_3:
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 3d12 + 1d12
-  type: Lightning, Lightning
+  type: Lightning
 - name: "Wither and Bloom " 
   range: 60 ft
   duration: Instantaneous
@@ -393,7 +430,7 @@ tab_2:
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 2d12 + 1d12
-  type: Lightning, Lightning
+  type: Lightning
 
 tab_4:
 - name: "Burning Hands (Upcast)" 
@@ -424,7 +461,7 @@ tab_4:
   range: Touch
   duration: Concentration, up to 1 minute
   cost: "Bonus Action"
-  damage: 4d6 + 4d6 + 4d6 + 4d6 + 4d6
+  damage: 4d6
   type: Acid, Cold, Fire, Lightning, Poison
 - name: "Fireball " 
   range: 150 ft
@@ -508,14 +545,14 @@ tab_4:
   range: Self
   duration: Concentration, up to 1 minute
   cost: "Action"
-  damage: 3d6
-  type: Necrotic
+  damage: 3d6 + 
+  type: Necrotic, Healing
 - name: "Witch Bolt (Upcast)" 
   range: 60 ft
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 4d12 + 1d12
-  type: Lightning, Lightning
+  type: Lightning
 - name: "Wither and Bloom (Upcast)" 
   range: 60 ft
   duration: Instantaneous
@@ -552,7 +589,7 @@ tab_5:
   range: Touch
   duration: Concentration, up to 1 minute
   cost: "Bonus Action"
-  damage: 5d6 + 5d6 + 5d6 + 5d6 + 5d6
+  damage: 5d6
   type: Acid, Cold, Fire, Lightning, Poison
 - name: "Fire Shield " 
   range: Self
@@ -631,634 +668,24 @@ tab_5:
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 4d6
-  type: Necrotic
+  type: Necrotic, Healing
 - name: "Vitriolic Sphere " 
   range: 150 ft
   duration: Instantaneous
   cost: "Action"
   damage: 10d4 + 5d4
-  type: Acid, Acid
+  type: Acid
 - name: "Witch Bolt (Upcast)" 
   range: 60 ft
   duration: Concentration, up to 1 minute
   cost: "Action"
   damage: 5d12 + 1d12
-  type: Lightning, Lightning
+  type: Lightning
 - name: "Wither and Bloom (Upcast)" 
   range: 60 ft
   duration: Instantaneous
   cost: "Action"
   damage: 4d6
-  type: Necrotic
-
-tab_6:
-- name: "Burning Hands (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d6
-  type: Fire
-- name: "Catapult (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d8
-  type: Bludgeoning
-- name: "Counterspell (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 
-  type: 
-- name: "Dispel Magic (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dragon's Breath (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 6d6 + 6d6 + 6d6 + 6d6 + 6d6
-  type: Acid, Cold, Fire, Lightning, Poison
-- name: "Fireball (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d6
-  type: Fire
-- name: "Fly (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 6d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 6d10
-  type: Fire
-- name: "Magic Missile (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 1d4
-  type: Force
-- name: "Melf's Minute Meteors (Upcast)" 
-  range: Self
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Rime's Binding Ice (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d8
-  type: Cold
-- name: "Scorching Ray (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Shadow Blade (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 11d8
-  type: Psychic
-- name: "Shatter (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d8
-  type: Thunder
-- name: "Thunderwave (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d8
-  type: Thunder
-- name: "Vampiric Touch (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 5d6
-  type: Necrotic
-- name: "Vitriolic Sphere (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 12d4 + 5d4
-  type: Acid, Acid
-- name: "Witch Bolt (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 6d12 + 1d12
-  type: Lightning, Lightning
-- name: "Wither and Bloom (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 5d6
-  type: Necrotic
-
-tab_7:
-- name: "Burning Hands (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d6
-  type: Fire
-- name: "Catapult (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d8
-  type: Bludgeoning
-- name: "Counterspell (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 
-  type: 
-- name: "Dispel Magic (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dragon's Breath (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 7d6 + 7d6 + 7d6 + 7d6 + 7d6
-  type: Acid, Cold, Fire, Lightning, Poison
-- name: "Fireball (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d6
-  type: Fire
-- name: "Fly (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 7d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 7d10
-  type: Fire
-- name: "Magic Missile (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 1d4
-  type: Force
-- name: "Melf's Minute Meteors (Upcast)" 
-  range: Self
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Rime's Binding Ice (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d8
-  type: Cold
-- name: "Scorching Ray (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Shadow Blade (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 14d8
-  type: Psychic
-- name: "Shatter (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d8
-  type: Thunder
-- name: "Thunderwave (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d8
-  type: Thunder
-- name: "Vampiric Touch (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 6d6
-  type: Necrotic
-- name: "Vitriolic Sphere (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 14d4 + 5d4
-  type: Acid, Acid
-- name: "Witch Bolt (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 7d12 + 1d12
-  type: Lightning, Lightning
-- name: "Wither and Bloom (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 6d6
-  type: Necrotic
-
-tab_8:
-- name: "Burning Hands (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d6
-  type: Fire
-- name: "Catapult (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d8
-  type: Bludgeoning
-- name: "Counterspell (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 
-  type: 
-- name: "Dispel Magic (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dragon's Breath (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 8d6 + 8d6 + 8d6 + 8d6 + 8d6
-  type: Acid, Cold, Fire, Lightning, Poison
-- name: "Fireball (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 12d6
-  type: Fire
-- name: "Fly (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 8d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 8d10
-  type: Fire
-- name: "Magic Missile (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 1d4
-  type: Force
-- name: "Melf's Minute Meteors (Upcast)" 
-  range: Self
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Rime's Binding Ice (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d8
-  type: Cold
-- name: "Scorching Ray (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Shadow Blade (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 17d8
-  type: Psychic
-- name: "Shatter (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d8
-  type: Thunder
-- name: "Thunderwave (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d8
-  type: Thunder
-- name: "Vampiric Touch (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 7d6
-  type: Necrotic
-- name: "Vitriolic Sphere (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 16d4 + 5d4
-  type: Acid, Acid
-- name: "Witch Bolt (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 8d12 + 1d12
-  type: Lightning, Lightning
-- name: "Wither and Bloom (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 7d6
-  type: Necrotic
-
-tab_9:
-- name: "Burning Hands (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d6
-  type: Fire
-- name: "Catapult (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d8
-  type: Bludgeoning
-- name: "Counterspell (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 
-  type: 
-- name: "Dispel Magic (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dragon's Breath (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 9d6 + 9d6 + 9d6 + 9d6 + 9d6
-  type: Acid, Cold, Fire, Lightning, Poison
-- name: "Fireball (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 13d6
-  type: Fire
-- name: "Fly (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 9d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 9d10
-  type: Fire
-- name: "Magic Missile (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 1d4
-  type: Force
-- name: "Melf's Minute Meteors (Upcast)" 
-  range: Self
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Rime's Binding Ice (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d8
-  type: Cold
-- name: "Scorching Ray (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Shadow Blade (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 20d8
-  type: Psychic
-- name: "Shatter (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d8
-  type: Thunder
-- name: "Thunderwave (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d8
-  type: Thunder
-- name: "Vampiric Touch (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 8d6
-  type: Necrotic
-- name: "Vitriolic Sphere (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 18d4 + 5d4
-  type: Acid, Acid
-- name: "Witch Bolt (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 9d12 + 1d12
-  type: Lightning, Lightning
-- name: "Wither and Bloom (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 8d6
-  type: Necrotic
-
-tab_10:
-- name: "Burning Hands (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d6
-  type: Fire
-- name: "Catapult (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 11d8
-  type: Bludgeoning
-- name: "Counterspell (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 
-  type: 
-- name: "Dispel Magic (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Dragon's Breath (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 10d6 + 10d6 + 10d6 + 10d6 + 10d6
-  type: Acid, Cold, Fire, Lightning, Poison
-- name: "Fireball (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 14d6
-  type: Fire
-- name: "Fly (Upcast)" 
-  range: Touch
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 10d10
-  type: Fire
-- name: "Hellish Rebuke (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Reaction"
-  damage: 10d10
-  type: Fire
-- name: "Magic Missile (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 1d4
-  type: Force
-- name: "Melf's Minute Meteors (Upcast)" 
-  range: Self
-  duration: Concentration, up to 10 minutes
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Rime's Binding Ice (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d8
-  type: Cold
-- name: "Scorching Ray (Upcast)" 
-  range: 120 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 2d6
-  type: Fire
-- name: "Shadow Blade (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Bonus Action"
-  damage: 23d8
-  type: Psychic
-- name: "Shatter (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d8
-  type: Thunder
-- name: "Thunderwave (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Action"
-  damage: 10d8
-  type: Thunder
-- name: "Vampiric Touch (Upcast)" 
-  range: Self
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 9d6
-  type: Necrotic
-- name: "Vitriolic Sphere (Upcast)" 
-  range: 150 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 20d4 + 5d4
-  type: Acid, Acid
-- name: "Witch Bolt (Upcast)" 
-  range: 60 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 10d12 + 1d12
-  type: Lightning, Lightning
-- name: "Wither and Bloom (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Action"
-  damage: 9d6
   type: Necrotic
 
 spellcasting:
@@ -1279,7 +706,7 @@ spellcasting:
   duration: Instantaneous
   cost: "Action"
   damage: 1d8
-  type: Fire, Fire
+  type: Fire
 - name: "Message " 
   range: 120 ft
   duration: Up to 1 round
