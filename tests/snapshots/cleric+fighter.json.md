@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 166044682
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Rolf
 species: "Human"
 class: "Cleric / Fighter"
@@ -33,7 +40,7 @@ hit_dice_pool:
   - name: "Fighter (d10)"
     max: 2
     used: 0
-initiative: "+2"
+initiative: "2"
 ac: 17
 speed: 30
 stats:
@@ -66,7 +73,7 @@ performance_override: " +1"
 persuasion_override: " +1"
 religion_override: " +3"
 sleight_of_hand_override: " -1"
-stealth_override: " <span style=\"color:#ef4444;font-weight:700;\">▼D</span> -1"
+stealth_override: "▼D -1"
 survival_override: " +2"
 
 history_prof: ◆
@@ -111,7 +118,7 @@ actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Channel Divinity: Divine Spark"
   range: ""
   attack: ""
@@ -143,24 +150,24 @@ actions:
   type: ""
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Shield of Faith"
+  range: "60 ft"
   attack: ""
   damage: ""
   type: ""
-  desc: "Shield of Faith "
+  desc: " "
 - name: "Second Wind"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />/ long rest"
 - name: "War Priest: Bonus Attack"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />/ short rest"
 
 reactions:
 - name: "Channel Divinity: Guided Strike (Benefit Ally)"
@@ -176,7 +183,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ short rest"
 - name: "Channel Divinity: Guided Strike (Self)"
   range: ""
   attack: ""
@@ -233,8 +240,8 @@ tab_2:
   range: Touch
   duration: Instantaneous
   cost: "Action"
-  damage: 
-  type: 
+  damage: 2d8
+  type: Healing
 - name: "Guiding Bolt " 
   range: 120 ft
   duration: Up to 1 round
@@ -260,152 +267,12 @@ tab_3:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Guiding Bolt (Upcast)" 
   range: 120 ft
   duration: Up to 1 round
   cost: "Action"
   damage: 5d6
-  type: Radiant
-
-tab_4:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 6d6
-  type: Radiant
-
-tab_5:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 7d6
-  type: Radiant
-
-tab_6:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 8d6
-  type: Radiant
-
-tab_7:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 9d6
-  type: Radiant
-
-tab_8:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 10d6
-  type: Radiant
-
-tab_9:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 11d6
-  type: Radiant
-
-tab_10:
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 12d6
   type: Radiant
 
 spellcasting:

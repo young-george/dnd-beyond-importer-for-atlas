@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 163345362
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Vowyn Zornall
 species: "Gnome"
 class: "Barbarian"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Barbarian (d12)"
     max: 5
     used: 0
-initiative: "+2"
+initiative: "2"
 ac: 12
 speed: 40
 stats:
@@ -44,9 +51,9 @@ saves:
 - str: " +7"
 - dex: " +2"
 - con: " +3"
-- int: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> -1"
-- wis: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +2"
-- cha: " <span style=\"color:#22c55e;font-weight:700;\">▲A</span> +0"
+- int: "▲A -1"
+- wis: "▲A +2"
+- cha: "▲A +0"
 acrobatics_override: " +2"
 animal_handling_override: " +2"
 arcana_override: " -1"
@@ -139,7 +146,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' checked/><input class='action-use' type='checkbox' />/ long rest"
 - name: "Tiny Clockwork Device: Activate"
   range: ""
   attack: ""

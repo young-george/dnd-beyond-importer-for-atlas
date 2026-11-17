@@ -1,4 +1,4 @@
-import {AdvState, DdbModifier} from "./types";
+import {AdvState, DdbModifier, DnDBeyondImporterSettings} from "./types";
 
 export default class Utilities {
 
@@ -40,5 +40,21 @@ export default class Utilities {
         }
 
         return ord;
+    }
+    
+    static shouldImport(settingKey: 'importWhenOpening' | 'importOnStartup', frontmatter: Record<string, any> | null | undefined, globalSettings: Partial<DnDBeyondImporterSettings>): boolean {
+        if (!frontmatter?.["dndbeyond_id"]) {
+            return false;
+        }
+
+        const setting = {
+            "undefined": undefined,
+            "true": true,
+            "false": false
+        }[(frontmatter?.[settingKey] as string | undefined) ?? "undefined"];
+
+        // checked on each leaf change so that changing relevant setting doesn't require a restart to take effect
+        return !((!globalSettings[settingKey] && !setting) || setting === false);
+        
     }
 }

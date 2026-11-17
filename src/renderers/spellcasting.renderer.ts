@@ -131,8 +131,8 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
     
     private getDamageType(spell: DdbSpell): string {
         return Array.from(new Set([
-                ...spell.definition?.modifiers.filter(mod => mod.type == 'damage').map(mod => mod.friendlySubtypeName),
-                ...spell.definition?.modifiers.filter(mod => mod.type == 'bonus' && mod.subType == 'hit-points').map(mod => 'Healing')
+                ...(spell.definition?.modifiers.filter(mod => mod.type == 'damage').map(mod => mod.friendlySubtypeName) ?? []),
+                ...(spell.definition?.modifiers.filter(mod => mod.type == 'bonus' && mod.subType == 'hit-points').map(mod => 'Healing') ?? [])
            ])).join(", ") ?? "";
     }
 

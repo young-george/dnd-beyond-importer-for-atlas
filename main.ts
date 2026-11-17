@@ -12,6 +12,7 @@ import ImportModal from "./src/import-modal";
 import MarkdownBuilder from "./src/markdown.builder";
 import 'src/array-extensions';
 import TemplateManager from "./src/TemplateManager";
+import Utilities from "./src/utilities";
 
 declare global {
 	interface Array<T> {
@@ -56,42 +57,22 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 						
 							const frontmatter = fileCache?.frontmatter;
 							
-							if (!frontmatter?.["dndbeyond_id"]) {
-								return;
-							}
-							
-							const importWhenOpening = {
-								"undefined": undefined,
-								"true": true,
-								"false": false
-							}[(frontmatter?.["importWhenOpening"] as string | undefined) ?? "undefined"];
-							
-							// checked on each leaf change so that changing relevant setting doesn't require a restart to take effect
-							if ((!this.pluginSettings.importWhenOpening && !importWhenOpening) || importWhenOpening === false) {
+							if (!Utilities.shouldImport("importWhenOpening", frontmatter, this.pluginSettings)) {
 								return;
 							}
 							
 							this.importCharacter(frontmatter["dndbeyond_id"].toString());
 							
 						}
-						
 					}
             	})
 			
 			for (const file of this.app.vault.getMarkdownFiles()) {
 				const fm: Record<string, unknown> | undefined = this.app.metadataCache.getFileCache(file)?.frontmatter;
 
-				const importOnStartup = {
-					"undefined": undefined,
-					"true": true,
-					"false": false
-				}[(fm?.["importOnStartup"] as string | undefined) ?? "undefined"];
-				
-				if ((!this.pluginSettings.importOnStartup && !importOnStartup) || importOnStartup === false) {
+				if (!Utilities.shouldImport("importWhenOpening", fm, this.pluginSettings)) {
 					continue;
 				}
-				
-				if (!fm?.["dndbeyond_id"]) continue;
 				await this.importCharacter(fm?.["dndbeyond_id"].toString());
 			}
 		});

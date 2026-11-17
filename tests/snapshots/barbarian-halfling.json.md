@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 154562875
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Butch Tungles
 species: "Halfling"
 class: "Barbarian"
@@ -30,7 +37,7 @@ hit_dice_pool:
   - name: "Barbarian (d12)"
     max: 7
     used: 0
-initiative: "+2"
+initiative: "2"
 ac: 16
 speed: 40
 stats:
@@ -147,7 +154,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Rage (Instinctive Pounce)"
   range: ""
   attack: ""

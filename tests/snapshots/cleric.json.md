@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 16051611
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Highflow Chugspout the 2nd
 species: "Skeleton"
 class: "Cleric"
@@ -63,7 +70,7 @@ performance_override: " -1"
 persuasion_override: " -1"
 religion_override: " +2"
 sleight_of_hand_override: " -1"
-stealth_override: " <span style=\"color:#ef4444;font-weight:700;\">▼D</span> -1"
+stealth_override: "▼D -1"
 survival_override: " +3"
 
 athletics_prof: ◆
@@ -120,18 +127,24 @@ actions:
   type: ""
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Healing Word"
+  range: "60 ft"
   attack: ""
   damage: ""
   type: ""
-  desc: "Healing Word, Shield of Faith "
+  desc: " "
+- name: "Shield of Faith"
+  range: "60 ft"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
 - name: "Harness Divine Power"
   range: ""
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 
 otheractions:
 - name: "Channel Divinity"
@@ -139,7 +152,7 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ short rest"
 - name: "Destroy Undead"
   range: ""
   attack: ""
@@ -184,8 +197,8 @@ tab_2:
   range: Touch
   duration: Instantaneous
   cost: "Action"
-  damage: 
-  type: 
+  damage: 1d8
+  type: Healing
 - name: "Guiding Bolt " 
   range: 120 ft
   duration: Up to 1 round
@@ -196,8 +209,8 @@ tab_2:
   range: 60 ft
   duration: Instantaneous
   cost: "Bonus Action"
-  damage: 
-  type: 
+  damage: 1d4
+  type: Healing
 - name: "Shield of Faith " 
   range: 60 ft
   duration: Concentration, up to 10 minutes
@@ -211,7 +224,7 @@ tab_3:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Guiding Bolt (Upcast)" 
   range: 120 ft
   duration: Up to 1 round
@@ -223,13 +236,13 @@ tab_3:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Prayer of Healing " 
   range: 30 ft
   duration: Instantaneous
   cost: "Time: 1 minute"
-  damage: 
-  type: 
+  damage: 2d8
+  type: Healing
 
 tab_4:
 - name: "Cure Wounds (Upcast)" 
@@ -237,7 +250,7 @@ tab_4:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Guiding Bolt (Upcast)" 
   range: 120 ft
   duration: Up to 1 round
@@ -249,13 +262,13 @@ tab_4:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Prayer of Healing (Upcast)" 
   range: 30 ft
   duration: Instantaneous
   cost: "Time: 1 minute"
   damage: 
-  type: 
+  type: Healing
 
 tab_5:
 - name: "Cure Wounds (Upcast)" 
@@ -263,7 +276,7 @@ tab_5:
   duration: Instantaneous
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Guiding Bolt (Upcast)" 
   range: 120 ft
   duration: Up to 1 round
@@ -275,143 +288,13 @@ tab_5:
   duration: Instantaneous
   cost: "Bonus Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Prayer of Healing (Upcast)" 
   range: 30 ft
   duration: Instantaneous
   cost: "Time: 1 minute"
   damage: 
-  type: 
-
-tab_6:
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 8d6
-  type: Radiant
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Prayer of Healing (Upcast)" 
-  range: 30 ft
-  duration: Instantaneous
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
-
-tab_7:
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 9d6
-  type: Radiant
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Prayer of Healing (Upcast)" 
-  range: 30 ft
-  duration: Instantaneous
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
-
-tab_8:
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 10d6
-  type: Radiant
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Prayer of Healing (Upcast)" 
-  range: 30 ft
-  duration: Instantaneous
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
-
-tab_9:
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 11d6
-  type: Radiant
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Prayer of Healing (Upcast)" 
-  range: 30 ft
-  duration: Instantaneous
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
-
-tab_10:
-- name: "Cure Wounds (Upcast)" 
-  range: Touch
-  duration: Instantaneous
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Guiding Bolt (Upcast)" 
-  range: 120 ft
-  duration: Up to 1 round
-  cost: "Action"
-  damage: 12d6
-  type: Radiant
-- name: "Healing Word (Upcast)" 
-  range: 60 ft
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 
-  type: 
-- name: "Prayer of Healing (Upcast)" 
-  range: 30 ft
-  duration: Instantaneous
-  cost: "Time: 1 minute"
-  damage: 
-  type: 
+  type: Healing
 
 spellcasting:
 - name: "Light " 

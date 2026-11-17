@@ -3,8 +3,15 @@ cssClasses: ["dnd-beyond-imported-character"]
 obsidianUIMode: preview
 atlas-template: "5e-2024-character-sheet-4r8tqz"
 statblock: true
-importer_version: 1.0.7
+importer_version: 1.0.9
 dndbeyond_id: 168838522
+# ----- Override settings -----
+embedDndBeyond: undefined
+includeDescriptions: undefined
+importOnStartup: undefined
+importWhenOpening: undefined
+importSkillValues: undefined
+# -------------------------------
 name: Raya
 species: "Human"
 class: "Paladin"
@@ -30,37 +37,37 @@ hit_dice_pool:
   - name: "Paladin (d10)"
     max: 7
     used: 0
-initiative: "+4"
+initiative: "4"
 ac: 17
 speed: 30
 stats:
   - 15
-  - 19
+  - 18
   - 14
   - 13
   - 9
-  - 18
+  - 16
 saves:
 - str: " +4"
 - dex: " +8"
 - con: " +4"
 - int: " +2"
 - wis: " +1"
-- cha: " +11"
+- cha: " +9"
 acrobatics_override: " +4"
 animal_handling_override: " -1"
 arcana_override: " +1"
 athletics_override: " +5"
-deception_override: " +4"
+deception_override: " +3"
 history_override: " +1"
 insight_override: " +2"
-intimidation_override: " +4"
+intimidation_override: " +3"
 investigation_override: " +4"
 medicine_override: " -1"
 nature_override: " +1"
 perception_override: " +2"
-performance_override: " +4"
-persuasion_override: " +4"
+performance_override: " +3"
+persuasion_override: " +3"
 religion_override: " +1"
 sleight_of_hand_override: " +4"
 stealth_override: " +4"
@@ -109,7 +116,7 @@ actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Push (Pike)"
   range: ""
   attack: ""
@@ -129,12 +136,54 @@ actions:
   type: ""
   desc: " "
 bonus_actions:
-- name: "Spells"
-  range: ""
+- name: "Divine Favor"
+  range: "Self"
+  attack: ""
+  damage: "1d4"
+  type: "Radiant"
+  desc: " "
+- name: "Divine Smite"
+  range: "Self"
+  attack: ""
+  damage: "2d8"
+  type: "Radiant"
+  desc: " Uses: <input class='action-use' type='checkbox' />/ long rest"
+- name: "Divine Smite"
+  range: "Self"
+  attack: ""
+  damage: "2d8"
+  type: "Radiant"
+  desc: " "
+- name: "Divine Smite"
+  range: "Self"
+  attack: ""
+  damage: "2d8"
+  type: "Radiant"
+  desc: " "
+- name: "Searing Smite"
+  range: "Self"
+  attack: "DC11 CON"
+  damage: "1d6"
+  type: "Fire, Fire"
+  desc: " "
+- name: "Shield of Faith"
+  range: "60 ft"
   attack: ""
   damage: ""
   type: ""
-  desc: "Divine Smite, Divine Smite, Shield of Faith, Divine Smite, Searing Smite, Shield of Faith, Divine Favor, Thunderous Smite "
+  desc: " "
+- name: "Shield of Faith"
+  range: "60 ft"
+  attack: ""
+  damage: ""
+  type: ""
+  desc: " "
+- name: "Thunderous Smite"
+  range: "Self"
+  attack: "DC11 STR"
+  damage: "2d6"
+  type: "Thunder"
+  desc: " "
 - name: "Channel Divinity: Divine Sense"
   range: ""
   attack: ""
@@ -152,7 +201,7 @@ bonus_actions:
   attack: ""
   damage: ""
   type: ""
-  desc: " <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />"
+  desc: " Uses: <input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' /><input class='action-use' type='checkbox' />/ long rest"
 - name: "Lay On Hands: Purify Poison"
   range: ""
   attack: ""
@@ -166,10 +215,10 @@ otheractions:
   attack: ""
   damage: ""
   type: ""
-  desc: " "
+  desc: " Uses: / long rest"
 spellcasting_ability: "CHA"
-spell_save_dc: 15
-spell_attack_bonus: +7
+spell_save_dc: 14
+spell_attack_bonus: +6
 
 slots:
 - name: 1st Level
@@ -206,7 +255,7 @@ tab_3:
   duration: Up to 8 hours
   cost: "Action"
   damage: 
-  type: 
+  type: Healing
 - name: "Bless (Upcast)" 
   range: 30 ft
   duration: Concentration, up to 1 minute
@@ -247,8 +296,8 @@ tab_3:
   range: Self
   duration: Up to 1 minute
   cost: "Bonus Action"
-  damage: 2d6 + 2d6
-  type: Fire, Fire
+  damage: 2d6
+  type: Fire
 - name: "Thunderous Smite (Upcast)" 
   range: Self
   duration: Instantaneous
@@ -261,314 +310,6 @@ tab_3:
   cost: "Action"
   damage: 
   type: 
-
-tab_4:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 4d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 4d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 4d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 3d6 + 3d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 4d6
-  type: Thunder
-
-tab_5:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 5d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 5d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 5d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 4d6 + 4d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 5d6
-  type: Thunder
-
-tab_6:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 6d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 6d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 6d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 5d6 + 5d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 6d6
-  type: Thunder
-
-tab_7:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 7d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 7d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 7d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 6d6 + 6d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 7d6
-  type: Thunder
-
-tab_8:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 8d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 8d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 8d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 7d6 + 7d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 8d6
-  type: Thunder
-
-tab_9:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 9d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 9d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 9d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 8d6 + 8d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 9d6
-  type: Thunder
-
-tab_10:
-- name: "Aid (Upcast)" 
-  range: 30 ft
-  duration: Up to 8 hours
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Bless (Upcast)" 
-  range: 30 ft
-  duration: Concentration, up to 1 minute
-  cost: "Action"
-  damage: 
-  type: 
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 10d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 10d8
-  type: Radiant
-- name: "Divine Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 10d8
-  type: Radiant
-- name: "Searing Smite (Upcast)" 
-  range: Self
-  duration: Up to 1 minute
-  cost: "Bonus Action"
-  damage: 9d6 + 9d6
-  type: Fire, Fire
-- name: "Thunderous Smite (Upcast)" 
-  range: Self
-  duration: Instantaneous
-  cost: "Bonus Action"
-  damage: 10d6
-  type: Thunder
 
 tab_2:
 - name: "Bless " 
@@ -612,7 +353,7 @@ tab_2:
   duration: Up to 1 minute
   cost: "Bonus Action"
   damage: 1d6
-  type: Fire, Fire
+  type: Fire
 - name: "Shield of Faith " 
   range: 60 ft
   duration: Concentration, up to 10 minutes

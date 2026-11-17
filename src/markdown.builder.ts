@@ -42,8 +42,10 @@ export default class MarkdownBuilder {
             }
         }
         
-        const overrideSettings = Object.assign({}, settings, settingsOverrides ?? {});
+        const overrideSettings = Object.assign({}, settings, Object.fromEntries(Object.entries(settingsOverrides ?? {}).filter(([_, value]) => value !== undefined)));
 
+        console.log("Building markdown with settings:", settings,  overrideSettings);
+        
         const sheet = new CharacterSheet(char, overrideSettings);
         
         
