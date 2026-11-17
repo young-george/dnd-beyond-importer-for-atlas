@@ -1,11 +1,14 @@
-import {App, Modal} from "obsidian";
+import {App, DropdownComponent, Modal, Setting} from "obsidian";
+import {DnDBeyondImporterSettings} from "./types";
+import {SETTING_DEFINITIONS} from "./settings-tab";
 
 export default class ImportModal extends Modal {
     plugin: InstanceType<typeof Plugin> & {
-        importCharacter: (url: string) => Promise<void>;
+        importCharacter: (url: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>) => Promise<void>;
         hpTracking: Map<string, { maxHp: number; currentHp: number; tempHp: number }>;
     };
     private urlValue = "";
+    private settingsOverrides: Partial<DnDBeyondImporterSettings> = {} as Partial<DnDBeyondImporterSettings>;
 
     constructor(app: App, plugin: ImportModal["plugin"]) {
         super(app);
@@ -15,29 +18,63 @@ export default class ImportModal extends Modal {
     onOpen() {
         const { contentEl } = this;
         contentEl.empty();
-        contentEl.createEl("h2", { text: "Import D&D Beyond Character" });
-        contentEl.createEl("p", {
-            text: "Paste the character URL or numeric ID. The character must be set to Public on D&D Beyond.",
-            cls: "setting-item-description",
-        });
+        
+        this.setTitle("Import D&D Beyond Character");
+        
+        new Setting(contentEl)
+            .setName("Character URL or ID")
+            .setDesc("Paste the character URL or numeric ID. The character must be set to Public on D&D Beyond.")
+            .setClass("dndbi-import-url-input")
+            .addText((text) =>
+                text
+                    .setPlaceholder("https://www.dndbeyond.com/characters/137202151/…")
+                    .setValue(this.urlValue)
+                    .onChange((value) => {
+                        this.urlValue = value;
+                    })
+            );
+        
+        const advanced = contentEl.createEl("details");
+        advanced.createEl("summary", { text: "Advanced Settings" });
+        
+        advanced.createEl("p", { cls: 'setting-item-name', text: "Override plugin settings for this character sheet. These settings are remembered for " +
+                "this character, and are applied when resyncing. These can be changed later by editing the statblock's frontmatter. Leave as 'Default' to uses the plugin's global settings." });
+        
+        new Setting(advanced)
+            .setName(SETTING_DEFINITIONS.includeDescriptions.name)
+            .setDesc(SETTING_DEFINITIONS.includeDescriptions.desc)
+            .addDropdown(dropdown => {
+                this.addStandardOptions(dropdown, "includeDescriptions")
+            });
 
-        const input = contentEl.createEl("input", {
-            type: "text",
-            placeholder: "https://www.dndbeyond.com/characters/137202151/…",
-            cls: "dndbi-import-input",
-        });
-
-        input.addEventListener("input", (e) => {
-            this.urlValue = (e.target as HTMLInputElement).value;
-        });
-        input.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                this.submit().catch((err: unknown) => {
-                    console.error("Import failed:", err);
-                });
-            }
-        });
-
+        new Setting(advanced)
+            .setName(SETTING_DEFINITIONS.embedDndBeyond.name)
+            .setDesc(SETTING_DEFINITIONS.embedDndBeyond.desc)
+            .addDropdown(dropdown => {
+                this.addStandardOptions(dropdown, "embedDndBeyond")
+            });
+        
+        new Setting(advanced)
+            .setName(SETTING_DEFINITIONS.importSkillValues.name)
+            .setDesc(SETTING_DEFINITIONS.importSkillValues.desc)
+            .addDropdown(dropdown => {
+                this.addStandardOptions(dropdown, "importSkillValues")
+            });
+        
+        new Setting(advanced)
+            .setName(SETTING_DEFINITIONS.importOnStartup.name)
+            .setDesc(SETTING_DEFINITIONS.importOnStartup.desc)
+            .addDropdown(dropdown => {
+                this.addStandardOptions(dropdown, "importOnStartup")
+            });
+        
+        new Setting(advanced)
+            .setName(SETTING_DEFINITIONS.importWhenOpening.name)
+            .setDesc(SETTING_DEFINITIONS.importWhenOpening.desc)
+            .addDropdown(dropdown => {
+                this.addStandardOptions(dropdown, "importWhenOpening")
+            });
+        
         const btnRow = contentEl.createDiv({ cls: "dndbi-import-btn-row" });
 
         const cancelBtn = btnRow.createEl("button", { text: "Cancel" });
@@ -52,16 +89,30 @@ export default class ImportModal extends Modal {
                 console.error("Import failed:", err);
             });
         });
-
-        window.setTimeout(() => input.focus(), 50);
+        
     }
 
     private async submit() {
         this.close();
-        await this.plugin.importCharacter(this.urlValue.trim());
+        await this.plugin.importCharacter(this.urlValue.trim(), this.settingsOverrides);
     }
 
     onClose() {
         this.contentEl.empty();
+    }
+    
+    private addStandardOptions(dropdown: DropdownComponent, key: keyof DnDBeyondImporterSettings): DropdownComponent {
+        return dropdown
+            .addOption("default", "Default")
+            .addOption("true", "Yes")
+            .addOption("false", "No")
+            .setValue("default")
+            .onChange(value => {
+                this.settingsOverrides[key] = {
+                    "default": undefined,
+                    "true": true,
+                    "false": false
+                }[value];
+            });
     }
 }

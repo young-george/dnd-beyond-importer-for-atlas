@@ -43,11 +43,6 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		this.app.workspace.onLayoutReady(async () => {
 			this.app.workspace.on('active-leaf-change', async(leaf: WorkspaceLeaf | null) => {
 				
-				// checked on each leaf change so that changing relevant setting doesn't require a restart to take effect
-				if (!this.pluginSettings.importWhenOpening) {
-					return;
-				}
-				
                 if (leaf) {
                     const activeFile = this.app.workspace.getActiveFile();
 					if(activeFile?.path == this.activeFilePath) {
@@ -60,23 +55,42 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 							const fileCache = this.app.metadataCache.getFileCache(activeFile);
 						
 							const frontmatter = fileCache?.frontmatter;
-
-							if (frontmatter?.["dndbeyond_id"]) {
-								this.importCharacter(frontmatter["dndbeyond_id"].toString());
+							
+							if (!frontmatter?.["dndbeyond_id"]) {
+								return;
 							}
+							
+							const importWhenOpening = {
+								"undefined": undefined,
+								"true": true,
+								"false": false
+							}[(frontmatter?.["importWhenOpening"] as string | undefined) ?? "undefined"];
+							
+							// checked on each leaf change so that changing relevant setting doesn't require a restart to take effect
+							if ((!this.pluginSettings.importWhenOpening && !importWhenOpening) || importWhenOpening === false) {
+								return;
+							}
+							
+							this.importCharacter(frontmatter["dndbeyond_id"].toString());
+							
 						}
 						
 					}
             	})
-
-
-			if (!this.pluginSettings.importOnStartup) {
-				return;
-			}
 			
 			for (const file of this.app.vault.getMarkdownFiles()) {
-				const fm: Record<string, unknown> | undefined =
-					this.app.metadataCache.getFileCache(file)?.frontmatter;
+				const fm: Record<string, unknown> | undefined = this.app.metadataCache.getFileCache(file)?.frontmatter;
+
+				const importOnStartup = {
+					"undefined": undefined,
+					"true": true,
+					"false": false
+				}[(fm?.["importOnStartup"] as string | undefined) ?? "undefined"];
+				
+				if ((!this.pluginSettings.importOnStartup && !importOnStartup) || importOnStartup === false) {
+					continue;
+				}
+				
 				if (!fm?.["dndbeyond_id"]) continue;
 				await this.importCharacter(fm?.["dndbeyond_id"].toString());
 			}
@@ -167,7 +181,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		await this.saveData(this.pluginSettings);
 	}
 	
-	async importCharacter(idOrUrl: string): Promise<void> {
+	async importCharacter(idOrUrl: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>): Promise<void> {
 		
 		await TemplateManager.installTemplate(this.app);
 		
@@ -218,7 +232,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		
 		let markdown: string;
 		try {
-			markdown = MarkdownBuilder.buildMarkdown(data, this.pluginSettings, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
+			markdown = MarkdownBuilder.buildMarkdown(data, this.pluginSettings, settingsOverrides, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
 		} catch (e) {
 			const msg = e instanceof Error ? e.message : String(e);
 			new Notice(`❌ Failed to build character note: ${msg}`, 5000);

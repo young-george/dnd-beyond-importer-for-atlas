@@ -7,6 +7,37 @@ type PluginWithSettings = InstanceType<typeof Plugin> & {
     saveSettings: () => Promise<void>;
 };
 
+export const SETTING_DEFINITIONS: Record<keyof DnDBeyondImporterSettings, {name: string; desc: string} > = {
+    includeDescriptions: {
+        name: "Include detailed descriptions",
+        desc: "Include detailed descriptions of features, traits, and spells in the character note, linked in the statblock. The descriptions can be viewed by hovering over the links in the statblock.",
+    },
+    embedDndBeyond: {
+        name: "Embed D&D Beyond page",
+        desc: "Embed the D&D Beyond character sheet page in the note. This allows you to view the full character sheet in Obsidian without leaving the app.",
+    },
+    importOnStartup: {
+        name: "Automatically sync when Obsidian opens",
+        desc: "Automatically sync all character sheets in the vault when Obsidian starts.",
+    },
+    importWhenOpening: {
+        name: "Automatically sync when opening sheet",
+        desc: "Automatically sync character sheet when opening & viewing the note in Obsidian. This will not sync the sheet when viewing the statblock in Atlas.",
+    },
+    importSkillValues: {
+        name: "Don't import skill modifiers",
+        desc: "Don't import skill modifiers when syncing character sheets, use Atlas' automatically calculated modifiers instead. This might cause Atlas' skill modifiers to differ from D&D Beyond's if you have items, feats, homebrew rules or other modifiers applied.",
+    },
+    outputFolder: {
+        name: "Output folder",
+        desc: "Vault folder where character notes are saved (leave blank for vault root).",
+    },
+    imageOutputFolder: {
+        name: "Image output folder",
+        desc: "Vault folder where character images are saved. Start with ~ to specify relative to imported sheet location.",
+    },
+}
+
 export default class DnDBeyondSettingTab extends PluginSettingTab {
     plugin: PluginWithSettings;
 
@@ -18,8 +49,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
     getSettingDefinitions() {
         return [
             {
-                name: "Output folder",
-                desc: "Vault folder where character notes are saved (leave blank for vault root).",
+                name: SETTING_DEFINITIONS.outputFolder.name,
+                desc: SETTING_DEFINITIONS.outputFolder.desc,
                 render: (setting: Setting) => {
                     setting.addText((text) =>
                         text
@@ -33,8 +64,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 },
             },
             {
-                name: "Image output folder",
-                desc: "Vault folder where character images are saved. Start with ~ to specify relative to imported sheet location.",
+                name: SETTING_DEFINITIONS.imageOutputFolder.name,
+                desc: SETTING_DEFINITIONS.imageOutputFolder.desc,
                 render: (setting: Setting) => {
                     setting.addText((text) =>
                         text
@@ -48,8 +79,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 },
             },
             {
-                name: "Include detailed descriptions",
-                desc: "Include detailed descriptions of features, traits, and spells in the character note, linked in the statblock. The descriptions can be viewed by hovering over the links in the statblock.",
+                name: SETTING_DEFINITIONS.includeDescriptions.name,
+                desc: SETTING_DEFINITIONS.includeDescriptions.desc,
                 render: (setting: Setting) => {
                     setting.addToggle((toggle) =>
                         toggle
@@ -62,8 +93,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 }
             },
             {
-                name: "Embed D&D Beyond page",
-                desc: "Embed the D&D Beyond character sheet page in the note. This allows you to view the full character sheet in Obsidian without leaving the app.",
+                name: SETTING_DEFINITIONS.embedDndBeyond.name,
+                desc: SETTING_DEFINITIONS.embedDndBeyond.desc,
                 render: (setting: Setting) => {
                     setting.addToggle((toggle) =>
                         toggle
@@ -80,8 +111,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 heading: 'Automatically Sync...',
                 items: [
                     {
-                        name: "When Obsidian opens",
-                        desc: "Automatically sync all character sheets in the vault when Obsidian starts.",
+                        name: SETTING_DEFINITIONS.importOnStartup.name,
+                        desc: SETTING_DEFINITIONS.importOnStartup.desc,
                         render: (setting: Setting) => {
                             setting.addToggle((toggle) =>
                                 toggle
@@ -94,8 +125,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                         }
                     },
                     {
-                        name: "When opening sheet",
-                        desc: "Automatically sync character sheet when opening & viewing the note in Obsidian. This will not sync the sheet when viewing the statblock in Atlas.",
+                        name: SETTING_DEFINITIONS.importWhenOpening.name,
+                        desc: SETTING_DEFINITIONS.importWhenOpening.desc,
                         render: (setting: Setting) => {
                             setting.addToggle((toggle) =>
                                 toggle
@@ -114,8 +145,8 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 heading: 'Advanced Settings',
                 items: [
                     {
-                        name: "Don't import skill modifiers",
-                        desc: "Don't import skill modifiers when syncing character sheets, use Atlas' automatically calculated modifiers instead. This might cause Atlas' skill modifiers to differ from D&D Beyond's if you have items, feats, homebrew rules or other modifiers applied.",
+                        name: SETTING_DEFINITIONS.importSkillValues.name,
+                        desc: SETTING_DEFINITIONS.importSkillValues.desc,
                         render: (setting: Setting) => {
                             setting.addToggle((toggle) =>
                                 toggle
