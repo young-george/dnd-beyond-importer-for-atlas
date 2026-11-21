@@ -123,7 +123,7 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
  
         const diceStrings = spell.definition?.modifiers.filter(mod => mod.type == 'damage' || (mod.type == 'bonus' && mod.subType == 'hit-points')).map(mod => {
             const atLevel = mod.atHigherLevels?.higherLevelDefinitions?.find(hl => hl.level != 1 && hl.level <= this.character.level)?.dice ?? mod.die;
-            return atLevel?.diceString;
+            return atLevel?.diceString + (mod.usePrimaryStat ? ` + ${this.character.spellcastingModifier}` : "");
         }) ?? []
         
         return Array.from(new Set(diceStrings)).join(" + ") ?? "";

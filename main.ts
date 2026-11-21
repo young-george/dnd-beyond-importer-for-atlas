@@ -169,8 +169,6 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 	
 	async importCharacter(idOrUrl: string): Promise<void> {
 		
-		await TemplateManager.installTemplate(this.app);
-		
 		const id = extractCharacterId(idOrUrl);
 		if (!id) {
 			new Notice("Couldn't find a D&D Beyond character ID in that input.", 4000);

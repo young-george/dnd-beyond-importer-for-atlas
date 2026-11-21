@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.0.11
+- Remove plugin template management, as templates can now be shared through the Armarium.
+- Fix issue with spells were missing the spellcasting ability modifier in the damage roll.
+
 ## 1.0.10
 - Correctly show heroic inspiration and death save results.
 - Handle advantage and disadvantage using Atlas' `adv` and `dis` markers, making the relevant rolls automatically roll with Advantage or Disadvantage.

@@ -50,6 +50,7 @@ export interface DdbDice {
 }
 
 export interface DdbModifier {
+    usePrimaryStat: boolean;
     atHigherLevels: {
         higherLevelDefinitions: {
             level: number;
