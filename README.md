@@ -2,7 +2,7 @@
 
 *DnD Beyond Importer for Atlas VTT is a community extension. It is not made, endorsed or supported by Atlas VTT or Atlas Online.*
 
-# D&D Beyond Importer for Atlas VTT
+# DnD Beyond Importer for Atlas VTT
 
 ### Import any public D&D Beyond character sheet into Obsidian as a ready to use statblock for Atlas VTT.
 
@@ -27,6 +27,7 @@
 5. Click **Install**, then **Enable**
 6. Configure plugin settings *(optional)*
 
+7. (Recommended) Install the [5e 2024 Character Sheet](https://atlas-vtt.dev/armarium/5e-2024-character-sheet) template from the Armarium. This template is used to render the imported character sheet in Atlas VTT.
 7. (Recommended) Install the [Force note view mode](https://community.obsidian.md/plugins/obsidian-view-mode-by-frontmatter) plugin. The importer makes use of this plugin to default to 'Reader' view, showing the embedded D&D Beyond page.
 
 ### Manual

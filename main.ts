@@ -4,8 +4,9 @@ import {
 	Plugin,
 	requestUrl,
 	TFile,
-	WorkspaceLeaf,
+	WorkspaceLeaf, MarkdownView,
 } from "obsidian";
+import DnDBeyondSettingTab, {PluginWithSettings} from "./src/settings-tab";
 import {
 	CampaignImportSettings,
 	DdbApiResponse, DdbCharacter,
@@ -17,7 +18,6 @@ import DnDBeyondSettingTab from "./src/settings-tab";
 import ImportModal from "./src/import-modal";
 import MarkdownBuilder from "./src/markdown.builder";
 import 'src/array-extensions';
-import TemplateManager from "./src/TemplateManager";
 import Utilities from "./src/utilities";
 
 declare global {
@@ -83,7 +83,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 			}
 		});
 
-		this.addSettingTab(new DnDBeyondSettingTab(this.app, this));
+		this.addSettingTab(new DnDBeyondSettingTab(this.app, this as PluginWithSettings));
 
 		this.addRibbonIcon("user-plus", "Import D&D Beyond character", () => {
 			new ImportModal(this.app, this).open();
@@ -102,10 +102,10 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 			name: "Sync D&D Beyond characters",
 			callback: () => {
 				for (const file of this.app.vault.getMarkdownFiles()) {
-					const fm: Record<string, unknown> | undefined =
+					const fm: Record<string, number> | undefined =
 						this.app.metadataCache.getFileCache(file)?.frontmatter;
 					if (!fm?.["dndbeyond_id"]) continue;
-					this.importCharacter(fm?.["dndbeyond_id"].toString());
+					void this.importCharacter(fm?.["dndbeyond_id"].toString());
 				}
 			}
 		});
@@ -136,7 +136,11 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 					refreshBtn.disabled = true;
 					refreshBtn.classList.remove("dndbi-flash-success", "dndbi-flash-error");
 
-					this.app.workspace.activeLeaf?.rebuildView();
+					const view = this.app.workspace.getActiveViewOfType(MarkdownView);
+					if (view) {
+						// rebuildView() is an internal WorkspaceLeaf method
+						(view.leaf as unknown as { rebuildView: () => void }).rebuildView();
+					}
 		
 					this.importCharacter(charId).then(() => {
 						refreshBtn.setText("✅ Refreshed");

@@ -1,5 +1,15 @@
 # Release Notes
 
+## 1.0.11
+- Remove plugin template management, as templates can now be shared through the Armarium.
+- Fix issue with spells were missing the spellcasting ability modifier in the damage roll.
+
+## 1.0.10
+- Correctly show heroic inspiration and death save results.
+- Handle advantage and disadvantage using Atlas' `adv` and `dis` markers, making the relevant rolls automatically roll with Advantage or Disadvantage.
+- Include skills with no proficiency in the statblock, to correctly render the dropdown in Atlas Online.
+- Fix issue with rendering of initiative in Atlas Online, including advantage/disadvantage.
+
 ## 1.0.9
 - Fix issue with reaction spells not appearing.
 - Fix an issue with spells upcasting all the way to level 9.

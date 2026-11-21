@@ -15,13 +15,29 @@ export interface Stats {
 }
 
 export interface ActionUses {
-    reset: string;
+    reset?: string;
     used: number;
     maximum: number;
 }
 
+export interface DdbLimitedUses {
+    resetType: number;
+    numberUsed: number;
+    maxUses: number;
+    statModifierUsesId: number;
+}
+
+export interface HasLimitedUse {
+    limitedUse?: DdbLimitedUses;
+}
+
+export interface DdbActivation {
+    activationType: number;
+    activationTime: number;
+}
+
 export interface CharacterAction {
-    uses?: ActionUses;
+    uses?: ActionUses | undefined;
     displayOrder?: number;
     save?: string;
     name: string;
@@ -50,6 +66,11 @@ export interface DdbDice {
 }
 
 export interface DdbModifier {
+    componentId: number;
+    availableToMulticlass?: boolean;
+    componentTypeId?: number;
+    friendlyTypeName?: string;
+    usePrimaryStat: boolean;
     atHigherLevels: {
         higherLevelDefinitions: {
             level: number;
@@ -87,13 +108,14 @@ export interface DdbRange {
 export interface DdbDefinition {
     grantedModifiers: DdbModifier[];
     id?: number;
+    entityTypeId?: number;
     definitionKey?: string;
     categoryId?: number;
     name?: string;
     description?: string;
     level?: number;
     school?: string;
-    activation?: { activationTime?: number; activationType?: number };
+    activation?: DdbActivation;
     range?: DdbRange;
     concentration?: boolean;
     armorClass?: number;
@@ -115,18 +137,18 @@ export interface DdbDefinition {
     }
 }
 
-export interface DdbSpell {
+export interface DdbSpell extends HasLimitedUse {
+    characterClassId?: number;
     definition?: DdbDefinition;
     prepared?: boolean;
-    activation?: { 
-        activationType?: number;
-    };
+    activation?: DdbActivation;
     spellCastingAbilityId?: number;
     range?: DdbRange;
     upcastLevel?: number;
 }
 
 export interface DdbClassSpell {
+    characterClassId: number;
     spells?: DdbSpell[];
 }
 
@@ -154,6 +176,7 @@ export interface DdbRace {
 }
 
 export interface DdbClassFeature {
+    id: number;
     definition?: DdbDefinition;
     levelScale?: { dice: DdbDice };
     indent?: boolean;
@@ -164,11 +187,13 @@ export interface DdbClassDefinition {
     name?: string;
     spellCastingAbilityId?: number;
     spellRules?: {
-        levelSpellSlots: Record<number, DdbSpellSlot[]>;
+        levelSpellSlots: number[][];
     };
+    classFeatures: DdbClassFeature[];
 }
 
 export interface DdbClass {
+    id: number;
     hitDiceUsed?: number;
     subclassDefinition: DdbClass;
     classFeatures: DdbClassFeature[];
@@ -182,7 +207,7 @@ export interface DdbClass {
 }
 
 export interface DdbBackground {
-    definition?: { name?: string };
+    definition?: DdbDefinition;
 }
 
 export interface DdbTraits {
@@ -222,12 +247,12 @@ export interface CharacterValue {
     value: number;
 }
 
-export interface DdbAction {
+export interface DdbAction extends HasLimitedUse {
     componentId: number;
     name: string;
     description: string;
     isSpell?: boolean;
-    activation?: { activationType?: number };
+    activation?: DdbActivation;
 }
 
 export interface DdbCampaign {
@@ -241,8 +266,35 @@ export interface DdbCampaignCharacter {
     characterId: number;
 }
 
+export interface DdbCustomAction extends HasLimitedUse{
+    activation: DdbActivation;
+    isSpell: boolean;
+    range: number;
+    damageBonus: number;
+    description: string;
+    name: string;
+    diceType: number;
+    diceCount: number;
+    isProficient?: number;
+    statId: number;
+}
+
+export interface DdbOption {
+    componentTypeId: number;
+    definition: DdbDefinition;
+    
+}
+
 export interface DdbCharacter {
-    options: { class?: {
+    customActions: DdbCustomAction[];
+    inspiration: boolean;
+    deathSaves: {
+        failCount: number;
+        successCount: number;
+    };
+    options: {
+        race: DdbOption[];
+        class?: {
         definition: DdbDefinition;
         componentId: number
         }[] };

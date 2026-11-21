@@ -1,8 +1,7 @@
-import {App, Plugin, PluginSettingTab, Setting, SettingDefinitionGroup, TFile, WorkspaceLeaf} from "obsidian";
+import {App, Plugin, PluginSettingTab, Setting, SettingDefinitionGroup } from "obsidian";
 import {DnDBeyondImporterSettings} from "./types";
-import DnDBeyondImporterPlugin from "../main";
 
-type PluginWithSettings = InstanceType<typeof Plugin> & {
+export type PluginWithSettings = InstanceType<typeof Plugin> & {
     pluginSettings: DnDBeyondImporterSettings;
     saveSettings: () => Promise<void>;
 };
@@ -52,7 +51,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 name: SETTING_DEFINITIONS.outputFolder.name,
                 desc: SETTING_DEFINITIONS.outputFolder.desc,
                 render: (setting: Setting) => {
-                    setting.addText((text) =>
+                    void setting.addText((text) =>
                         text
                             .setPlaceholder("Characters")
                             .setValue(this.plugin.pluginSettings.outputFolder)
@@ -67,7 +66,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 name: SETTING_DEFINITIONS.imageOutputFolder.name,
                 desc: SETTING_DEFINITIONS.imageOutputFolder.desc,
                 render: (setting: Setting) => {
-                    setting.addText((text) =>
+                    void setting.addText((text) =>
                         text
                             .setPlaceholder("~/Images/")
                             .setValue(this.plugin.pluginSettings.imageOutputFolder)
@@ -82,7 +81,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 name: SETTING_DEFINITIONS.includeDescriptions.name,
                 desc: SETTING_DEFINITIONS.includeDescriptions.desc,
                 render: (setting: Setting) => {
-                    setting.addToggle((toggle) =>
+                    void setting.addToggle((toggle) =>
                         toggle
                             .setValue(this.plugin.pluginSettings.includeDescriptions ?? true)
                             .onChange((value) => {
@@ -96,7 +95,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                 name: SETTING_DEFINITIONS.embedDndBeyond.name,
                 desc: SETTING_DEFINITIONS.embedDndBeyond.desc,
                 render: (setting: Setting) => {
-                    setting.addToggle((toggle) =>
+                    void setting.addToggle((toggle) =>
                         toggle
                             .setValue(this.plugin.pluginSettings.embedDndBeyond ?? true)
                             .onChange((value) => {
@@ -114,7 +113,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                         name: SETTING_DEFINITIONS.importOnStartup.name,
                         desc: SETTING_DEFINITIONS.importOnStartup.desc,
                         render: (setting: Setting) => {
-                            setting.addToggle((toggle) =>
+                            void setting.addToggle((toggle) =>
                                 toggle
                                     .setValue(this.plugin.pluginSettings.importOnStartup ?? true)
                                     .onChange((value) => {
@@ -128,7 +127,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                         name: SETTING_DEFINITIONS.importWhenOpening.name,
                         desc: SETTING_DEFINITIONS.importWhenOpening.desc,
                         render: (setting: Setting) => {
-                            setting.addToggle((toggle) =>
+                            void setting.addToggle((toggle) =>
                                 toggle
                                     .setValue(this.plugin.pluginSettings.importWhenOpening ?? true)
                                     .onChange((value) => {
@@ -148,7 +147,7 @@ export default class DnDBeyondSettingTab extends PluginSettingTab {
                         name: SETTING_DEFINITIONS.importSkillValues.name,
                         desc: SETTING_DEFINITIONS.importSkillValues.desc,
                         render: (setting: Setting) => {
-                            setting.addToggle((toggle) =>
+                            void setting.addToggle((toggle) =>
                                 toggle
                                     .setValue(!this.plugin.pluginSettings.importSkillValues)
                                     .onChange((value) => {

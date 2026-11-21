@@ -72,7 +72,7 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
             if (!byLevel.has(lvl)) byLevel.set(lvl, []);
             byLevel.get(lvl)!.push(spell);
             if (spell.definition?.canCastAtHigherLevel && spell.definition.level != 0){
-                Array.from({length: maximumLevel! - spell.definition.level}, (_, i) => spell.definition!.level + i + 1).forEach(lvl => {
+                Array.from({length: maximumLevel! - (spell.definition.level ?? 0)}, (_, i) => (spell.definition!.level ?? 0) + i + 1).forEach(lvl => {
                     if (!byLevel.has(lvl)) byLevel.set(lvl, []);
                     byLevel.get(lvl)!.push({...spell, upcastLevel: lvl});
                 });
@@ -123,7 +123,7 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
  
         const diceStrings = spell.definition?.modifiers.filter(mod => mod.type == 'damage' || (mod.type == 'bonus' && mod.subType == 'hit-points')).map(mod => {
             const atLevel = mod.atHigherLevels?.higherLevelDefinitions?.find(hl => hl.level != 1 && hl.level <= this.character.level)?.dice ?? mod.die;
-            return atLevel?.diceString;
+            return atLevel?.diceString + (mod.usePrimaryStat ? ` + ${this.character.spellcastingModifier}` : "");
         }) ?? []
         
         return Array.from(new Set(diceStrings)).join(" + ") ?? "";
@@ -131,8 +131,8 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
     
     private getDamageType(spell: DdbSpell): string {
         return Array.from(new Set([
-                ...(spell.definition?.modifiers.filter(mod => mod.type == 'damage').map(mod => mod.friendlySubtypeName) ?? []),
-                ...(spell.definition?.modifiers.filter(mod => mod.type == 'bonus' && mod.subType == 'hit-points').map(mod => 'Healing') ?? [])
+                ...spell.definition?.modifiers.filter(mod => mod.type == 'damage').map(mod => mod.friendlySubtypeName) ?? [],
+                ...spell.definition?.modifiers.filter(mod => mod.type == 'bonus' && mod.subType == 'hit-points').map(mod => 'Healing') ?? []
            ])).join(", ") ?? "";
     }
 

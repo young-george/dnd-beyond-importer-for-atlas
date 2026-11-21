@@ -21,7 +21,7 @@ export default class CharacterSheet {
             ...(this.raw.inventory?.flatMap(item => item.grantedModifiers ?? []) ?? [])
         ].filter(m => {
             if (isMultiClass){
-                return m.availableToMulticlass || (this.raw.classes?.[0].definition.classFeatures.some(f => f.id === m.componentId) ?? false);
+                return m.availableToMulticlass || (this.raw.classes?.[0].definition?.classFeatures.some(f => f.id === m.componentId) ?? false);
             }
             return true;
         })

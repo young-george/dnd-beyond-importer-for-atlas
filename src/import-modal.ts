@@ -1,11 +1,10 @@
-import {App, DropdownComponent, Modal, Setting} from "obsidian";
+import {App, DropdownComponent, Modal, Setting, Plugin} from "obsidian";
 import {CampaignImportSettings, DnDBeyondImporterSettings} from "./types";
 import {SETTING_DEFINITIONS} from "./settings-tab";
 
 export default class ImportModal extends Modal {
     plugin: InstanceType<typeof Plugin> & {
         importCharacter: (url: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>, campaignSettings?: Partial<CampaignImportSettings>) => Promise<void>;
-        hpTracking: Map<string, { maxHp: number; currentHp: number; tempHp: number }>;
     };
     private urlValue = "";
     private settingsOverrides: Partial<DnDBeyondImporterSettings> = {} as Partial<DnDBeyondImporterSettings>;
