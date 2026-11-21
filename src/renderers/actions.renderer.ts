@@ -1,5 +1,5 @@
 import AbstractRenderer from "./abstract.renderer";
-import {CharacterAction, DdbAction, DdbDefinition, DdbDice, DdbSpell} from "../types";
+import {ActionUses, CharacterAction, DdbDefinition, DdbDice, HasLimitedUse} from "../types";
 import {statKeys} from "../damageTypes";
 
 const optionalClassFeatureIds = [
@@ -22,7 +22,7 @@ export default class ActionsRenderer extends AbstractRenderer {
 
         const actionsObj = this.extractActions();
         
-        function formatUses(uses: { reset: string; used: number, maximum: number} | undefined): string {
+        function formatUses(uses?: ActionUses): string {
             if (!uses) return "";
             const checkboxes = Array.from({ length: uses.maximum }, (_, index) => `<input class='action-use' type='checkbox' ${index < uses.used ? 'checked':''}/>`).join("");
             return `Uses: ${checkboxes}/ ${uses.reset}`;
@@ -251,7 +251,7 @@ export default class ActionsRenderer extends AbstractRenderer {
                 damageDice: damages.map(d => d.die.diceString?.replace(' + ', '+')).distinct().join(" + ") || null,
                 damageBonus: damageBonuses,
                 range: action.range?.rangeValue ? `${action.range?.rangeValue} ft` : (action.range?.origin ?? ''),
-                damageType: damages.map(d => d.friendlySubtypeName).join(", ") || null,
+                damageType: damages.map(d => d.friendlySubtypeName).join(", ") || undefined,
                 notes: ``,
                 isSpell: true,
                 uses: this.getUses(action),
@@ -315,13 +315,13 @@ export default class ActionsRenderer extends AbstractRenderer {
         return responses.map(response => response.toSorted((a, b) => a.name.localeCompare(b.name)));
     }
 
-    private getUses(action: DdbAction | DdbSpell){
+    private getUses(action: HasLimitedUse) : ActionUses | undefined{
         if (!action.limitedUse){
             return undefined;
         }
         const maximum = action.limitedUse.statModifierUsesId ? this.character.statsById[action.limitedUse.statModifierUsesId]?.mod : action.limitedUse.maxUses;
         
-        return {used: action.limitedUse.numberUsed, maximum, reset: [null, "short rest", "long rest", "day"][action.limitedUse.resetType ?? 0] ?? null};
+        return {used: action.limitedUse.numberUsed, maximum, reset: [null, "short rest", "long rest", "day"][action.limitedUse.resetType ?? 0] ?? undefined};
     }
     
     private getActionResponse() {

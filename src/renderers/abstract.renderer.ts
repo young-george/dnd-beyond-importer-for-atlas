@@ -1,9 +1,6 @@
 import CharacterSheet from "../character-sheet";
 import {DnDBeyondImporterSettings} from "../types";
 
-export class RendererRegistration {
-}
-
 export default abstract class AbstractRenderer {
     
     character: CharacterSheet;

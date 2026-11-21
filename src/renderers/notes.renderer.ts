@@ -1,5 +1,4 @@
 import AbstractRenderer from "./abstract.renderer";
-import {context} from "esbuild";
 
 export default class NotesRenderer extends AbstractRenderer {
     render(): string {

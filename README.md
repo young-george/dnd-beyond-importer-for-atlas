@@ -2,7 +2,7 @@
 
 *DnD Beyond Importer for Atlas VTT is a community extension. It is not made, endorsed or supported by Atlas VTT or Atlas Online.*
 
-# D&D Beyond Importer for Atlas VTT
+# DnD Beyond Importer for Atlas VTT
 
 ### Import any public D&D Beyond character sheet into Obsidian as a ready to use statblock for Atlas VTT.
 

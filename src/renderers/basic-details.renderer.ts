@@ -1,8 +1,6 @@
 import AbstractRenderer from "./abstract.renderer";
 import Utilities from "../utilities";
 import {creatureSizes} from "../damageTypes";
-import {requestUrl} from "obsidian";
-
 
 export default class BasicDetailsRenderer extends AbstractRenderer {
 

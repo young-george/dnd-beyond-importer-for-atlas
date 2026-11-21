@@ -1,9 +1,8 @@
-import {App, Modal} from "obsidian";
+import {App, Modal, Plugin} from "obsidian";
 
 export default class ImportModal extends Modal {
     plugin: InstanceType<typeof Plugin> & {
         importCharacter: (url: string) => Promise<void>;
-        hpTracking: Map<string, { maxHp: number; currentHp: number; tempHp: number }>;
     };
     private urlValue = "";
 
