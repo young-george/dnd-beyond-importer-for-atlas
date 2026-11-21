@@ -236,6 +236,11 @@ export interface DdbCampaign {
 }
 
 export interface DdbCharacter {
+    inspiration: boolean;
+    deathSaves: {
+        failCount: number;
+        successCount: number;
+    };
     options: { class?: {
         definition: DdbDefinition;
         componentId: number

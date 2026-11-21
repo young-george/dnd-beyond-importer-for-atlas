@@ -7,8 +7,8 @@ export default class Utilities {
     }
 
     static getAdvantageState(allMods: DdbModifier[], subType: string, broadSubType: string): AdvState {
-        const hasAdv = allMods.some((m) => m.type === "advantage" && (m.subType === subType || m.subType === broadSubType) && !m.restriction);
-        const hasDis = allMods.some((m) => m.type === "disadvantage" && (m.subType === subType || m.subType === broadSubType) && !m.restriction);
+        const hasAdv = allMods.some((m) => m.type === "advantage" && (m.subType === subType || m.subType === broadSubType) && (!m.restriction || m.restriction === " unless you are Incapacitated."));
+        const hasDis = allMods.some((m) => m.type === "disadvantage" && (m.subType === subType || m.subType === broadSubType) && (!m.restriction || m.restriction === " unless you are Incapacitated."));
         if (hasAdv && hasDis) return "none";
         if (hasAdv) return "advantage";
         if (hasDis) return "disadvantage";
@@ -17,8 +17,8 @@ export default class Utilities {
 
     static formatAdvMarkerMd(advState: AdvState): string {
         return {
-            "advantage": "▲A",
-            "disadvantage": "▼D",
+            "advantage": "adv",
+            "disadvantage": "dis",
             "none": ""
         }[advState];
     }

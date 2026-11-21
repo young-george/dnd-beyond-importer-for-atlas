@@ -22,6 +22,11 @@ tags: [${this.tags().map((t) => `"${t}"`).join(", ")}]
 proficiency_bonus: "${Utilities.toModString(this.character.proficiencyBonus)}"
 pb: "${Utilities.toModString(this.character.proficiencyBonus)}"
 image: [[${this.character.raw.name ?? "character"}_${this.character.raw.id}.jpg]]
+heroic_inspiration:
+  - name: Inspiration
+    max: 1
+    used: ${this.character.raw.inspiration ? 0 : 1}
+    templateMax: 1
 `
 // image: ${this.character.raw.decorations?.avatarUrl?.split('?')[0] ?? ""}
     }

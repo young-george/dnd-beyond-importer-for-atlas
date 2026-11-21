@@ -4,8 +4,11 @@ import Utilities from "../utilities";
 export default class CombatStatsRenderer extends AbstractRenderer {
 
     render(): string {
+        
+        const initiativeAdvantage = Utilities.getAdvantageState(this.character.allModifiers, "initiative", "initiative");
+        
         return `
-initiative: "${this.calculateInitiative()}"
+initiative: ${Utilities.toModString(this.calculateInitiative())} ${Utilities.formatAdvMarkerMd(initiativeAdvantage)}
 ac: ${this.calculateAC()}
 speed: ${this.calculateSpeed()}`
     }

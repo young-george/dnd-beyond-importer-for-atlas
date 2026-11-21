@@ -16,6 +16,7 @@ import EquipmentRenderer from "./renderers/equipment.renderer";
 import CurrenciesRenderer from "./renderers/currencies.renderer";
 import NotesRenderer from "./renderers/notes.renderer";
 import TurndownService from 'turndown';
+import DeathSavesRenderer from "./renderers/death-saves.renderer";
 
 export default class MarkdownBuilder {
     
@@ -36,6 +37,7 @@ export default class MarkdownBuilder {
             new FrontmatterRenderer(sheet, settings, existingFrontmatter),
             new BasicDetailsRenderer(sheet, settings),
             new HitpointsRenderer(sheet, settings),
+            new DeathSavesRenderer(sheet, settings),
             new CombatStatsRenderer(sheet, settings),
             new StatsRenderer(sheet, settings),
             new SkillsRenderer(sheet, settings),

@@ -1,6 +1,6 @@
 {
   "format": "atlas-statblock-template",
-  "version": 1,
+  "version": 2,
   "id": "5e-2024-character-sheet-4r8tqz",
   "description": "5E (2024 rules) character sheet, as comprehensive as possible",
   "diceSetId": "builtin:d20",
@@ -89,7 +89,8 @@
       "counterRows": [
         {
           "name": "Inspiration",
-          "max": 1
+          "max": 1,
+          "used": 1
         }
       ]
     },
@@ -146,7 +147,8 @@
       "counterRows": [
         {
           "name": "Success",
-          "max": 3
+          "max": 3,
+          "used": 3
         }
       ]
     },
@@ -157,7 +159,8 @@
       "counterRows": [
         {
           "name": "Failure",
-          "max": 3
+          "max": 3,
+          "used": 3
         }
       ]
     },
@@ -1356,17 +1359,17 @@
         ],
         "rollable": true
       },
-{
-  "id": "c5pb0000",
-  "type": "stat",
-  "field": "pb",
-  "label": "Proficiency Bonus",
-  "look": "run-in",
-  "whenEmpty": "fallback",
-  "fallback": "{=floor((level - 1) / 4) + 2}",
+      {
+        "id": "c5pb0000",
+        "type": "stat",
+        "field": "pb",
+        "label": "Proficiency Bonus",
+        "look": "run-in",
+        "whenEmpty": "fallback",
+        "fallback": "{=floor((level - 1) / 4) + 2}",
         "rollable": true,
         "addsToRolls": true
-},
+      },
       {
         "id": "c5hd0000",
         "type": "stat",
@@ -3810,6 +3813,27 @@
     "speed": 30,
     "pb": 2,
     "hp": 12,
+    "heroic_inspiration": [
+      {
+        "name": "Inspiration",
+        "max": 1,
+        "used": 1
+      }
+    ],
+    "death_save_success": [
+      {
+        "name": "Success",
+        "max": 3,
+        "used": 3
+      }
+    ],
+    "death_save_failure": [
+      {
+        "name": "Failure",
+        "max": 3,
+        "used": 3
+      }
+    ],
     "stats": [
       15,
       14,

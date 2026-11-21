@@ -34,7 +34,7 @@ ${this.renderSavingThrows()}`
             const str = total >= 0 ? `+${total}` : `${total}`;
             const advState = Utilities.getAdvantageState(this.character.allModifiers, subType, "saving-throws");
             const advMarker = Utilities.formatAdvMarkerMd(advState);
-            return `- ${key}: "${advMarker} ${str}"`;
+            return `- ${key}: "${str} ${advMarker}"`;
         });
 
         return `saves:\n${cells.join("\n")}\n`;

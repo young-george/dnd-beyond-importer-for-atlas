@@ -33,10 +33,6 @@ export default class SkillsRenderer extends AbstractRenderer {
             'wis': 'wisdom-ability-checks',
             'cha': 'charisma-ability-checks'
         }
-        
-        const expertises = [];
-        const profs = [];
-        const halfProfs = [];
 
         let md = '';
         for (const skill of skillDefs) {
@@ -56,13 +52,15 @@ export default class SkillsRenderer extends AbstractRenderer {
             const halfProf = customProf != 1 && this.character.allModifiers.some(
                 (m) => m.type === "half-proficiency" && [skill.key, 'ability-checks'].includes(m.subType) && !prof
             ) || customProf == 2;
-
+            
             if (expertise){
-                expertises.push(skill);
+                md += `${skill.fieldOverride ?? skill.key}_prof: ❖\n`
             } else if (prof) {
-                profs.push(skill);
+                md += `${skill.fieldOverride ?? skill.key}_prof: ◆\n`
             } else if (halfProf) {
-                halfProfs.push(skill);
+                md += `${skill.fieldOverride ?? skill.key}_prof: ⬖\n`
+            } else {
+                md += `${skill.fieldOverride ?? skill.key}_prof: ◇\n`
             }
 
             let bonus = base;
@@ -93,14 +91,10 @@ export default class SkillsRenderer extends AbstractRenderer {
             const advMarker = Utilities.formatAdvMarkerMd(advState);
             
             if (this.pluginSettings.importSkillValues){
-                md += `${skill.fieldOverride ?? skill.key}_override: "${advMarker} ${bonusStr}"\n`;
+                md += `${skill.fieldOverride ?? skill.key}_override: "${bonusStr} ${advMarker}"\n`;
             }
         }
         
-        md += expertises.map(prof => `${prof.fieldOverride ?? prof.key}_prof: ❖`).join("\n") + "\n";
-        md += profs.map(prof => `${prof.fieldOverride ?? prof.key}_prof: ◆`).join("\n") + "\n";
-        md += halfProfs.map(prof => `${prof.fieldOverride ?? prof.key}_prof: ⬖`).join("\n") + "\n";
-
         return md;
     }
     
