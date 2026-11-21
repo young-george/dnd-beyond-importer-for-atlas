@@ -6,7 +6,13 @@ import {
 	TFile,
 	WorkspaceLeaf,
 } from "obsidian";
-import {DdbApiResponse, DEFAULT_SETTINGS, DnDBeyondImporterSettings, PartyInventory} from "./src/types";
+import {
+	CampaignImportSettings,
+	DdbApiResponse, DdbCharacter,
+	DEFAULT_SETTINGS,
+	DnDBeyondImporterSettings,
+	PartyInventory
+} from "./src/types";
 import DnDBeyondSettingTab from "./src/settings-tab";
 import ImportModal from "./src/import-modal";
 import MarkdownBuilder from "./src/markdown.builder";
@@ -103,7 +109,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 				}
 			}
 		});
-
+		
 		this.registerMarkdownCodeBlockProcessor("dnd-sheet-launcher-atlas", (source: string, el: HTMLElement) => {
 			const params: Record<string, string> = {};
 			for (const line of source.split("\n")) {
@@ -162,65 +168,71 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 		await this.saveData(this.pluginSettings);
 	}
 	
-	async importCharacter(idOrUrl: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>): Promise<void> {
+	async importCampaign(idOrUrl: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>, campaignSettings?: Partial<CampaignImportSettings>): Promise<void> {
+		const id = extractCharacterId(idOrUrl);
 		
+		const baseCharacterData = await this.fetchCharacterData(idOrUrl);
+		
+		if (!baseCharacterData.campaign){
+			new Notice("This character is not part of a campaign.", 4000);
+			return;
+		}
+		
+		await Promise.all(baseCharacterData.campaign.characters.map(async (campaignCharacter) => await this.importCharacter(campaignCharacter.characterId.toString(), settingsOverrides, {campaignName: baseCharacterData.campaign?.name, isCampaignImport: true})));
+		
+		const encounter = {
+			"description": "Encounter with 2 tokens",
+			"tokens": baseCharacterData.campaign.characters.map(c => ({
+						"id": `token-${c?.characterId}-96cpjf`,
+						"name": c?.characterName ?? "Unknown",
+						"size": 1,
+						"statblockPath": `${c?.characterName}.md`
+				})),
+			"atlasRecord": {
+				"format": 1,
+				"name": baseCharacterData.campaign.name,
+				"collection": "Default",
+				"tags": ["D&D Beyond Importer"],
+				"id": `encounter-${baseCharacterData.campaign.id}-znm1kd`,
+				"createdAt": Date.now(),
+				"modifiedAt": Date.now(),
+				"type": "encounter"
+			}
+		}
+
+		const createdFile = await this.app.vault.create(`atlas-vtt/collections/Default/encounters/encounter-${baseCharacterData.campaign.id}-znm1kd.json`, JSON.stringify(encounter, null, 2));
+		
+		new Notice(`✅ Imported campaign ${baseCharacterData.campaign.name}.`, 3000);
+	}
+	
+	async importCharacter(idOrUrl: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>, campaignSettings?: Partial<CampaignImportSettings>): Promise<void> {
 		await TemplateManager.installTemplate(this.app);
 		
-		const id = extractCharacterId(idOrUrl);
-		if (!id) {
-			new Notice("Couldn't find a D&D Beyond character ID in that input.", 4000);
-			throw new Error("Invalid D&D Beyond character URL or ID.");
+		if (campaignSettings?.importCampagn) {
+			await this.importCampaign(idOrUrl, settingsOverrides, campaignSettings);
+			return;
 		}
-
-		let data: DdbApiResponse;
-		let partyInventory: PartyInventory = { data: { partyItems: [] } };
-		try {
-			const resp = await requestUrl({
-				url: `https://character-service.dndbeyond.com/character/v5/character/${id}?includeCustomItems=true`,
-				headers: { Accept: "application/json" },
-			});
-			data = resp.json as DdbApiResponse;
-			
-			if(data?.data?.campaign) {
-				const partyInv = await requestUrl({
-					url: `https://character-service.dndbeyond.com/character/v5/party/inventory/${data.data.campaign.id}`,
-					headers: { Accept: "application/json" },
-				});
-				partyInventory = partyInv.json as PartyInventory;
-			}
-		} catch (e) {
-			const msg = e instanceof Error ? e.message : String(e);
-			new Notice(`❌ Couldn't fetch character ${id}. Make sure the sheet is set to Public on D&D Beyond.`, 5000);
-			throw new Error(`Failed to fetch D&D Beyond character ${id}: ${msg}`);
-		}
-
-		const char = data?.data;
-		if (!char) {
-			new Notice("❌ Unexpected response from D&D Beyond. Is the character set to Public?", 5000);
-			throw new Error("Unexpected D&D Beyond API response structure.");
-		}
-
-		const partyItems = partyInventory?.data?.partyItems?.filter(i => i.equippedEntityId == char.id)?.map(i => i.definition.grantedModifiers ?? [])?.flat() ?? [];
-		char.modifiers?.item?.push(...partyItems);
+		
+		const character = await this.fetchCharacterData(idOrUrl);
 
 		const existing: TFile | undefined = this.app.vault.getMarkdownFiles().find(
 			(f: TFile) => {
 				const fm: Record<string, unknown> | undefined =
 					this.app.metadataCache.getFileCache(f)?.frontmatter;
-				return fm?.["dndbeyond_id"] === char.id;
+				return fm?.["dndbeyond_id"] === character.id;
 			}
 		);
 		
 		let markdown: string;
 		try {
-			markdown = MarkdownBuilder.buildMarkdown(data, this.pluginSettings, settingsOverrides, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
+			markdown = MarkdownBuilder.buildMarkdown(character, this.pluginSettings, settingsOverrides, existing ? this.app.metadataCache.getFileCache(existing)?.frontmatter : undefined);
 		} catch (e) {
 			const msg = e instanceof Error ? e.message : String(e);
 			new Notice(`❌ Failed to build character note: ${msg}`, 5000);
 			throw e;
 		}
 
-		const folder = (this.pluginSettings.outputFolder || "Characters").trim();
+		const folder = this.toPath(this.pluginSettings.outputFolder || "Characters", campaignSettings?.campaignName || "");
 		if (folder && !this.app.vault.getAbstractFileByPath(folder)) {
 			try {
 				await this.app.vault.createFolder(folder);
@@ -229,7 +241,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 			}
 		}
 
-		const safeName = (char.name ?? `Character ${id}`).replace(/[\\/:*?"<>|]/g, "-").trim();
+		const safeName = (character.name ?? `Character ${character.id}`).replace(/[\\/:*?"<>|]/g, "-").trim();
 		const defaultPath = normalizePath(`${folder}/${safeName}.md`);
 		let imagePath = folder;
 
@@ -246,9 +258,10 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 					suffix++;
 				}
 				const createdFile = await this.app.vault.create(targetPath, markdown);
-				
-				const leaf = this.app.workspace.getLeaf(false);
-				await leaf.openFile(createdFile);
+				if (!campaignSettings?.isCampaignImport){
+					const leaf = this.app.workspace.getLeaf(false);
+					await leaf.openFile(createdFile);
+				}
 				
 			}
 		} catch (e) {
@@ -263,7 +276,7 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 			normalizePath(`${imagePath}/${imageOutputFolder.replace('~/', '').replace('~', '')}`) :
 			normalizePath(`${imageOutputFolder}`);
 
-		const existingImage = this.app.vault.getFiles().find(f => f.name === `${char.name ?? "character"}_${char.id}.jpg`);
+		const existingImage = this.app.vault.getFiles().find(f => f.name === `${character.name ?? "character"}_${character.id}.jpg`);
 		
 		if (!existingImage) {
 
@@ -276,12 +289,79 @@ export default class DnDBeyondImporterPlugin extends Plugin {
 			}
 
 			try {
-				await this.app.vault.createBinary(`${imageDirectory}/${char.name ?? "character"}_${char.id}.jpg`, await requestUrl({url: char.decorations?.avatarUrl ?? ""}).arrayBuffer);
+				await this.app.vault.createBinary(`${imageDirectory}/${character.name ?? "character"}_${character.id}.jpg`, await requestUrl({url: character.decorations?.avatarUrl ?? ""}).arrayBuffer);
 			} catch (e) {
 				console.error(e);
 			}
 		}
 
-		new Notice(`✅ Imported ${char.name ?? "character"}.`, 3000);
+		const atlasDefinition = {
+			"atlasRecord": {
+				"format": 1,
+				"type": "token",
+				"showRing": true,
+				"name": character.name,
+				"imagePath": `${imageDirectory}/${character.name ?? "character"}_${character.id}.jpg`,
+				"size": 1,
+				"statblockPath": this.toPath(folder, `${character.name}.md`),
+				"playerCharacter": true,
+				"collection": "Default",
+				"tags": [],
+				"thumbnailPath": `${imageDirectory}/${character.name ?? "character"}_${character.id}.jpg`,
+				"id": `token-${character.id}-96cpjf`,
+				"createdAt": Date.now(),
+				"modifiedAt": Date.now()
+			}
+		}
+
+		await this.app.vault.create(`atlas-vtt/collections/Default/tokens/token-${character.id}-96cpjf.json`, JSON.stringify(atlasDefinition, null, 2));
+
+		new Notice(`✅ Imported ${character.name ?? "character"}.`, 3000);
+	}
+
+	private async fetchCharacterData(idOrUrl: string) {
+
+		const id = extractCharacterId(idOrUrl);
+		if (!id) {
+			new Notice("Couldn't find a D&D Beyond character ID in that input.", 4000);
+			throw new Error("Invalid D&D Beyond character URL or ID.");
+		}
+		
+		let data: DdbApiResponse;
+		let partyInventory: PartyInventory = {data: {partyItems: []}};
+		try {
+			const resp = await requestUrl({
+				url: `https://character-service.dndbeyond.com/character/v5/character/${id}?includeCustomItems=true`,
+				headers: {Accept: "application/json"},
+			});
+			data = resp.json as DdbApiResponse;
+
+			if (data?.data?.campaign) {
+				const partyInv = await requestUrl({
+					url: `https://character-service.dndbeyond.com/character/v5/party/inventory/${data.data.campaign.id}`,
+					headers: {Accept: "application/json"},
+				});
+				partyInventory = partyInv.json as PartyInventory;
+			}
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : String(e);
+			new Notice(`❌ Couldn't fetch character ${id}. Make sure the sheet is set to Public on D&D Beyond.`, 5000);
+			throw new Error(`Failed to fetch D&D Beyond character ${id}: ${msg}`);
+		}
+
+		const character = data?.data;
+		if (!character) {
+			new Notice("❌ Unexpected response from D&D Beyond. Is the character set to Public?", 5000);
+			throw new Error("Unexpected D&D Beyond API response structure.");
+		}
+
+		const partyItems = partyInventory?.data?.partyItems?.filter(i => i.equippedEntityId == character.id)?.map(i => i.definition.grantedModifiers ?? [])?.flat() ?? [];
+		character.modifiers?.item?.push(...partyItems);
+		
+		return character;
+	}
+	
+	private toPath(...parts: string[]): string {
+		return parts.filter(Boolean).map(p => p.trim()).join("/");
 	}
 }

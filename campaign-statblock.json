@@ -1,0 +1,114 @@
+{
+  "format": "atlas-statblock-template",
+  "version": 1,
+  "id": "campaign-ywyxa4",
+  "fields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "key": "ac",
+      "label": "Armor",
+      "type": "number",
+      "meaning": "armor"
+    },
+    {
+      "key": "hp",
+      "label": "Hit Points",
+      "type": "number",
+      "meaning": "hit-points"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "type": "text",
+      "meaning": "speed"
+    },
+    {
+      "key": "senses",
+      "label": "Senses",
+      "type": "text",
+      "meaning": "senses"
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "markdown"
+    },
+    {
+      "key": "traits",
+      "label": "Traits",
+      "type": "entries"
+    },
+    {
+      "key": "players",
+      "label": "Players",
+      "type": "entries",
+      "prompt": "Add a player",
+      "entry": {
+        "extras": [
+          {
+            "key": "perception",
+            "label": "Perception",
+            "type": "number"
+          },
+          {
+            "key": "investigation",
+            "label": "Investigation",
+            "type": "number"
+          },
+          {
+            "key": "insight",
+            "label": "Insight",
+            "type": "number"
+          },
+          {
+            "key": "ac",
+            "label": "AC",
+            "type": "number"
+          },
+          {
+            "key": "hp-max",
+            "label": "Max HP",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "key": "image",
+      "label": "Token art",
+      "type": "image"
+    },
+    {
+      "key": "level",
+      "label": "Level",
+      "type": "rating",
+      "meaning": "rating"
+    },
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "text",
+      "meaning": "creature-type"
+    }
+  ],
+  "layout": {
+    "maxColumns": 1,
+    "columnWidth": 22,
+    "blocks": [
+      {
+        "id": "gcplayer",
+        "type": "entries",
+        "field": "players",
+        "heading": "Players",
+        "addLabel": "Add a player"
+      }
+    ]
+  },
+  "sample": {
+    "name": "Creature name"
+  }
+}

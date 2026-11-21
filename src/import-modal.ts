@@ -1,14 +1,15 @@
 import {App, DropdownComponent, Modal, Setting} from "obsidian";
-import {DnDBeyondImporterSettings} from "./types";
+import {CampaignImportSettings, DnDBeyondImporterSettings} from "./types";
 import {SETTING_DEFINITIONS} from "./settings-tab";
 
 export default class ImportModal extends Modal {
     plugin: InstanceType<typeof Plugin> & {
-        importCharacter: (url: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>) => Promise<void>;
+        importCharacter: (url: string, settingsOverrides?: Partial<DnDBeyondImporterSettings>, campaignSettings?: Partial<CampaignImportSettings>) => Promise<void>;
         hpTracking: Map<string, { maxHp: number; currentHp: number; tempHp: number }>;
     };
     private urlValue = "";
     private settingsOverrides: Partial<DnDBeyondImporterSettings> = {} as Partial<DnDBeyondImporterSettings>;
+    private campaignSettings: Partial<CampaignImportSettings> = {} as Partial<CampaignImportSettings>;
 
     constructor(app: App, plugin: ImportModal["plugin"]) {
         super(app);
@@ -34,7 +35,20 @@ export default class ImportModal extends Modal {
                     })
             );
         
-        const advanced = contentEl.createEl("details");
+        const campaign = contentEl.createEl("details", {cls: "dndbi-import-setting-group"});
+        campaign.createEl("summary", { text: "Campaign Settings" });
+
+        new Setting(campaign)
+            .setName("Import Campaign")
+            .setDesc("Import all character sheets from the campaign associated with the linked character.")
+            .addToggle(toggle => {
+                toggle.setValue(false);
+                toggle.onChange((value) => {
+                    this.campaignSettings.importCampagn = value;
+                });
+            });
+        
+        const advanced = contentEl.createEl("details", {cls: "dndbi-import-setting-group"});
         advanced.createEl("summary", { text: "Advanced Settings" });
         
         advanced.createEl("p", { cls: 'setting-item-name', text: "Override plugin settings for this character sheet. These settings are remembered for " +
@@ -94,7 +108,7 @@ export default class ImportModal extends Modal {
 
     private async submit() {
         this.close();
-        await this.plugin.importCharacter(this.urlValue.trim(), this.settingsOverrides);
+        await this.plugin.importCharacter(this.urlValue.trim(), this.settingsOverrides, this.campaignSettings);
     }
 
     onClose() {

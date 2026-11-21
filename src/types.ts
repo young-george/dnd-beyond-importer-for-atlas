@@ -232,7 +232,13 @@ export interface DdbAction {
 
 export interface DdbCampaign {
     id: number;
-    
+    name: string;
+    characters: DdbCampaignCharacter[];
+}
+
+export interface DdbCampaignCharacter {
+    characterName: string;
+    characterId: number;
 }
 
 export interface DdbCharacter {
@@ -310,6 +316,12 @@ export interface DnDBeyondImporterSettings {
     importWhenOpening: boolean;
     embedDndBeyond: boolean;
     outputFolder: string;
+}
+
+export interface CampaignImportSettings {
+    importCampagn?: boolean;
+    campaignName?: string;
+    isCampaignImport?: boolean;
 }
 
 export const DEFAULT_SETTINGS: DnDBeyondImporterSettings = {

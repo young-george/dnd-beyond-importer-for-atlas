@@ -1,4 +1,4 @@
-import {DdbApiResponse, DnDBeyondImporterSettings} from "./types";
+import {DdbApiResponse, DdbCharacter, DnDBeyondImporterSettings} from "./types";
 import CharacterSheet from "./character-sheet";
 import FrontmatterRenderer from "./renderers/frontmatter.renderer";
 import BasicDetailsRenderer from "./renderers/basic-details.renderer";
@@ -23,14 +23,13 @@ export default class MarkdownBuilder {
     static turndownService = new TurndownService();
   
     static buildMarkdown(
-        data: DdbApiResponse,
+        character: DdbCharacter,
         settings: Partial<DnDBeyondImporterSettings>,
         settingsOverrides?: Partial<DnDBeyondImporterSettings>,
         existingFrontmatter?: Record<string, unknown>
     ): string {
 
-        const char = data.data;
-        if (!char) throw new Error("Unexpected API response structure");
+        if (!character) throw new Error("Unexpected API response structure");
 
         if (!settingsOverrides){
             settingsOverrides = {
@@ -44,9 +43,8 @@ export default class MarkdownBuilder {
         
         const overrideSettings = Object.assign({}, settings, Object.fromEntries(Object.entries(settingsOverrides ?? {}).filter(([_, value]) => value !== undefined)));
 
-        console.log("Building markdown with settings:", settings,  overrideSettings);
         
-        const sheet = new CharacterSheet(char, overrideSettings);
+        const sheet = new CharacterSheet(character, overrideSettings);
         
         
         const renderers = [
@@ -73,10 +71,10 @@ ${renderers.map(r => r.render().trim()).join("\n")}
 ---
 
 \`\`\`dnd-sheet-launcher-atlas
-charId:${char.id}
+charId:${character.id}
 \`\`\`\n\n
 
-${overrideSettings.embedDndBeyond ? `<iframe class="dnd-frame" src="https://www.dndbeyond.com/characters/${char.id}"></iframe>` : ''}
+${overrideSettings.embedDndBeyond ? `<iframe class="dnd-frame" src="https://www.dndbeyond.com/characters/${character.id}"></iframe>` : ''}
 
 ${this.buildDetails(sheet)}
 `

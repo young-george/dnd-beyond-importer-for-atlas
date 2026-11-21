@@ -87,3 +87,23 @@
 		}
 	}
 }
+
+.dndbi-import-setting-group {
+	margin-bottom: 1rem;
+}
+
+[data-callout="dnd-character-summary"]{
+	display: contents;
+	.callout-title {
+		display: none;
+	}
+	
+	.callout-content {
+		display: grid;
+		grid-template-columns: repeat(6, auto);
+	}
+	
+	.block-language-dnd-character-summary, .block-language-dnd-character-summary>div {
+		display: contents;
+	}
+}
