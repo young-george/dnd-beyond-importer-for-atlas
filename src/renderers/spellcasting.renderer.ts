@@ -81,11 +81,7 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
 
         const durations: Record<string, (duration: {durationUnit: string, durationInterval: number}) => string> = {
             "Time": ({durationUnit, durationInterval}) => `Up to ${durationInterval} ${durationUnit.toLowerCase()}${durationInterval > 1 ? 's' : ''}`,
-            "Instantaneous": () => `Instantaneous`,
             "Concentration": ({durationUnit, durationInterval}) => `Concentration, up to ${durationInterval} ${durationUnit.toLowerCase()}${durationInterval > 1 ? 's' : ''}`,
-            undefined: () => `Unknown`,
-            "None": () => `Unknown`,
-            "Until Dispelled": () => `Until Dispelled`,
         }
         
         const costs: Record<number, string> = {
@@ -100,7 +96,7 @@ spell_attack_bonus: ${spellAttackBonus >= 0 ? `+${spellAttackBonus}` : `${spellA
         return [...byLevel.entries()].map(([lvl, spells]) => {
             return `${spellTabNames[lvl]}:\n${spells.map(spell => `- name: "${this.character.linkName(spell.definition?.name, spell.definition?.description)} ${spell.upcastLevel ? `(Upcast)` : ""}" 
   range: ${spell.definition?.range?.rangeValue ? `${spell.definition?.range?.rangeValue} ft` : spell.definition?.range?.origin}
-  duration: ${durations[spell.definition?.duration?.durationType ?? "None"](spell.definition?.duration ?? {durationUnit: "None", durationInterval: 0})}
+  duration: ${durations[spell.definition?.duration?.durationType ?? "None"]?.(spell.definition?.duration ?? {durationUnit: "None", durationInterval: 0}) ?? spell.definition?.duration?.durationType}
   cost: "${costs[spell.definition?.activation?.activationType ?? 8]}"
   damage: ${this.getDamage(spell)}
   type: ${this.getDamageType(spell)}

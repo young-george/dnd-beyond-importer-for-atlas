@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.0.12
+- Improve handling of spell durations, add handling for generic types.
+
 ## 1.0.11
 - Remove plugin template management, as templates can now be shared through the Armarium.
 - Fix issue with spells were missing the spellcasting ability modifier in the damage roll.
